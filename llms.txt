@@ -22,6 +22,7 @@ This site is available for AI indexing and retrieval at https://indagor.ru.
 - [Веб-разработка](https://indagor.ru/services/web-development/): лендинги, корпоративные сайты, веб-приложения, личные кабинеты, каталоги, интеграции.
 - [CRM и аналитика](https://indagor.ru/services/crm-analytics/): настройка CRM, учёт заявок, интеграции, дашборды и управленческая отчётность.
 - [Клондайк (Klondayk)](https://indagor.ru/klondayk/): платформа для коммерческой недвижимости.
+- [О студии](https://indagor.ru/about/): принципы работы, подход к технологиям, процесс.
 - [Политика конфиденциальности](https://indagor.ru/privacy.html).
 
 ## Контакты
