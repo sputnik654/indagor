@@ -137,6 +137,25 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:24px 0;color:#85837c;f
 .footer-inner a{color:var(--gold);padding:12px 0;line-height:20px}
 @media(max-width:900px){.grid,.facts{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.grid,.facts{grid-template-columns:1fr}.nav{display:none}.hero{padding:56px 0 48px}h1{font-size:29px}}
+
+/* ===== Модальное окно Telegram ===== */
+.tgm-overlay{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,5,5,.8);backdrop-filter:blur(6px);opacity:0;transition:opacity .18s ease}
+.tgm-overlay.is-open{display:flex;opacity:1}
+.tgm-dialog{position:relative;width:100%;max-width:420px;background:#101211;border:1px solid rgba(214,173,99,.55);padding:34px 30px 28px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.tgm-close{position:absolute;top:6px;right:6px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:#8d8b84;font-size:24px;line-height:1;cursor:pointer;padding:0}
+.tgm-close:hover{color:var(--gold2)}
+.tgm-close:focus-visible{outline:2px solid var(--gold2);outline-offset:-2px}
+.tgm-title{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.2;margin:0 0 10px;color:var(--gold2)}
+.tgm-sub{font-size:13px;color:#a7a69f;margin:0 0 22px;line-height:1.6}
+.tgm-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:0 18px;font:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none;border:1px solid var(--gold);transition:filter .2s,background .2s}
+.tgm-btn-primary{background:linear-gradient(135deg,#f2d99d,#c89b4c);color:#17130b;margin-bottom:12px}
+.tgm-btn-primary:hover{filter:brightness(1.07)}
+.tgm-btn-copy{background:transparent;color:var(--gold2);border-color:rgba(214,173,99,.45)}
+.tgm-btn-copy:hover{background:rgba(214,173,99,.08)}
+.tgm-btn:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+.tgm-hint{font-size:11.5px;line-height:1.6;color:#85837c;margin:16px 0 0}
+body.tgm-lock{overflow:hidden}
+@media(max-width:420px){.tgm-dialog{padding:30px 20px 24px}.tgm-title{font-size:22px}.tgm-sub{font-size:12.5px}}
 </style>
 </head>
 <body>
@@ -194,5 +213,75 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:24px 0;color:#85837c;f
  <a href="/about/">О студии</a>
  <a href="/privacy.html">Политика конфиденциальности</a>
 </div></footer>
+<!-- Модальное окно Telegram -->
+<div class="tgm-overlay" id="tgModal" role="dialog" aria-modal="true" aria-labelledby="tgModalTitle">
+ <div class="tgm-dialog">
+  <button type="button" class="tgm-close" id="tgClose" aria-label="Закрыть окно">&times;</button>
+  <h2 class="tgm-title" id="tgModalTitle">Связаться с нами</h2>
+  <p class="tgm-sub">Telegram — основной канал связи: задачи, презентации, вопросы.</p>
+  <a class="tgm-btn tgm-btn-primary" id="tgOpen" href="tg://resolve?domain=HitSputnik">Открыть Telegram</a>
+  <button type="button" class="tgm-btn tgm-btn-copy" id="tgCopy">Скопировать ник @HitSputnik</button>
+  <p class="tgm-hint">Если Telegram не открылся, скопируйте ник и напишите нам в приложении.</p>
+ </div>
+</div>
+<script>
+(function(){
+ var SEL='a[href*="t.me/HitSputnik"]';
+ var overlay=document.getElementById('tgModal');
+ if(!overlay){return;}
+ var closeBtn=document.getElementById('tgClose');
+ var openBtn=document.getElementById('tgOpen');
+ var copyBtn=document.getElementById('tgCopy');
+ var lastFocus=null;
+ function closestLink(el){
+  while(el&&el!==document){
+   if(el.nodeType===1&&el.matches&&el.matches(SEL)){return el;}
+   el=el.parentNode;
+  }
+  return null;
+ }
+ function openModal(e){
+  if(e&&e.preventDefault){e.preventDefault();}
+  lastFocus=document.activeElement;
+  overlay.classList.add('is-open');
+  document.body.classList.add('tgm-lock');
+  setTimeout(function(){if(openBtn&&openBtn.focus){openBtn.focus();}},40);
+ }
+ function closeModal(){
+  overlay.classList.remove('is-open');
+  document.body.classList.remove('tgm-lock');
+  if(lastFocus&&lastFocus.focus){lastFocus.focus();}
+ }
+ document.addEventListener('click',function(e){
+  var a=closestLink(e.target);
+  if(a){openModal(e);}
+ });
+ if(closeBtn){closeBtn.addEventListener('click',closeModal);}
+ overlay.addEventListener('click',function(e){if(e.target===overlay){closeModal();}});
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&overlay.classList.contains('is-open')){closeModal();}
+ });
+ if(copyBtn){
+  copyBtn.addEventListener('click',function(){
+   var original=copyBtn.textContent;
+   function done(){
+    copyBtn.textContent='Скопировано!';
+    setTimeout(function(){copyBtn.textContent=original;},2000);
+   }
+   function fallback(){
+    var ta=document.createElement('textarea');
+    ta.value='@HitSputnik';ta.setAttribute('readonly','');
+    ta.style.position='absolute';ta.style.left='-9999px';ta.style.top='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');done();}catch(err){}
+    document.body.removeChild(ta);
+   }
+   if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText('@HitSputnik').then(done).catch(fallback);
+   }else{fallback();}
+  });
+ }
+})();
+</script>
 </body>
 </html>
