@@ -277,6 +277,9 @@ h1 em{font-style:normal;color:var(--gold2)}
 .section-intro{max-width:390px;color:var(--muted);font-size:14px;margin:0}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .card{position:relative;min-height:245px;padding:34px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.008));border:1px solid rgba(255,255,255,.09);transition:border-color .25s,transform .25s;overflow:hidden}
+.card:has(.card-more){cursor:pointer}
+.card-more::after{content:"";position:absolute;inset:0;z-index:1}
+.card-more:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
 .card:hover{border-color:rgba(214,173,99,.6);transform:translateY(-4px)}
 .card-num{font-family:var(--serif);font-size:14px;color:var(--gold);letter-spacing:.12em}
 .card h3{font-family:var(--serif);font-weight:400;font-size:25px;margin:24px 0 10px}
@@ -402,9 +405,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
    <div class="section-head reveal"><div><div class="eyebrow">Что мы создаём</div><h2>Технологии, которые<br>работают на бизнес.</h2></div><p class="section-intro">От точечного инструмента до цифровой инфраструктуры — подбираем архитектуру под задачу, а не под модный стек.</p></div>
    <div class="grid">
-    <article class="card reveal"><span class="card-num">01 / DIGITAL PRODUCTS</span><span class="card-arrow">↗</span><h3>Цифровые продукты</h3><p>Корпоративные сайты, веб-приложения, клиентские кабинеты, внутренние платформы и интеграции.</p><a class="card-more" href="/services/web-development/">Подробнее <span aria-hidden="true">→</span></a></article>
-    <article class="card reveal"><span class="card-num">02 / AI &amp; AUTOMATION</span><span class="card-arrow">↗</span><h3>AI и автоматизация</h3><p>Интеллектуальные ассистенты, боты и автоматизация обработки обращений, документов и повторяющихся операций.</p><a class="card-more" href="/services/ai-automation/">Подробнее <span aria-hidden="true">→</span></a></article>
-    <article class="card reveal"><span class="card-num">03 / DATA &amp; MANAGEMENT</span><span class="card-arrow">↗</span><h3>CRM, аналитика и управление</h3><p>Системы учёта заявок, интеграция сервисов, управленческая отчётность и визуализация данных.</p><a class="card-more" href="/services/crm-analytics/">Подробнее <span aria-hidden="true">→</span></a></article>
+    <article class="card reveal"><span class="card-num">01 / DIGITAL PRODUCTS</span><span class="card-arrow">↗</span><h3>Цифровые продукты</h3><p>Корпоративные сайты, веб-приложения, клиентские кабинеты, внутренние платформы и интеграции.</p><a class="card-more" href="/services/web-development/" aria-label="Подробнее: цифровые продукты и веб-разработка">Подробнее <span aria-hidden="true">→</span></a></article>
+    <article class="card reveal"><span class="card-num">02 / AI &amp; AUTOMATION</span><span class="card-arrow">↗</span><h3>AI и автоматизация</h3><p>Интеллектуальные ассистенты, боты и автоматизация обработки обращений, документов и повторяющихся операций.</p><a class="card-more" href="/services/ai-automation/" aria-label="Подробнее: AI и автоматизация">Подробнее <span aria-hidden="true">→</span></a></article>
+    <article class="card reveal"><span class="card-num">03 / DATA &amp; MANAGEMENT</span><span class="card-arrow">↗</span><h3>CRM, аналитика и управление</h3><p>Системы учёта заявок, интеграция сервисов, управленческая отчётность и визуализация данных.</p><a class="card-more" href="/services/crm-analytics/" aria-label="Подробнее: CRM и аналитика">Подробнее <span aria-hidden="true">→</span></a></article>
     <article class="card reveal"><span class="card-num">04 / REAL ESTATE</span><span class="card-arrow">↗</span><h3>Цифровые экосистемы недвижимости</h3><p>Решения для торговых и бизнес-центров: арендаторы, помещения, заявки, сервисы и операционные процессы.</p></article>
    </div>
   </div>
