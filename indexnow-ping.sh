@@ -6,12 +6,12 @@
 #   ./indexnow-ping.sh                                  # отправить главную и Клондайк
 #   ./indexnow-ping.sh https://indagor.ru/ https://indagor.ru/klondayk/
 #
-# Ключ лежит в файле 8e5b2f3913456525b2d57b15ffc011e7.txt в корне сайта.
+# Ключ лежит в файле 0cfa9c5716e44e47bc869ab3ab4d66a9.txt в корне сайта.
 # Поисковик сам проверит его по адресу https://indagor.ru/<ключ>.txt
 
 set -euo pipefail
 
-KEY="8e5b2f3913456525b2d57b15ffc011e7"
+KEY="0cfa9c5716e44e47bc869ab3ab4d66a9"
 HOST="indagor.ru"
 
 if [ "$#" -gt 0 ]; then
