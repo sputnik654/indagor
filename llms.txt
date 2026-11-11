@@ -19,6 +19,7 @@ This site is available for AI indexing and retrieval at https://indagor.ru.
 
 - [Главная](https://indagor.ru/): компетенции, процесс работы, FAQ.
 - [AI и автоматизация](https://indagor.ru/services/ai-automation/): ИИ-ассистенты, обработка документов, интеграции с CRM, парсинг.
+- [Веб-разработка](https://indagor.ru/services/web-development/): лендинги, корпоративные сайты, веб-приложения, личные кабинеты, каталоги, интеграции.
 - [Клондайк (Klondayk)](https://indagor.ru/klondayk/): платформа для коммерческой недвижимости.
 - [Политика конфиденциальности](https://indagor.ru/privacy.html).
 
