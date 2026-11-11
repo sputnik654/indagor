@@ -23,6 +23,8 @@ This site is available for AI indexing and retrieval at https://indagor.ru.
 - [CRM и аналитика](https://indagor.ru/services/crm-analytics/): настройка CRM, учёт заявок, интеграции, дашборды и управленческая отчётность.
 - [Клондайк (Klondayk)](https://indagor.ru/klondayk/): платформа для коммерческой недвижимости.
 - [О студии](https://indagor.ru/about/): принципы работы, подход к технологиям, процесс.
+- [Статьи](https://indagor.ru/blog/): разборы процессов и практические материалы.
+  - [Что автоматизировать в первую очередь: 5 процессов](https://indagor.ru/blog/chto-avtomatizirovat-v-pervuyu-ochered/): заявки, ответы клиентам, отчётность, документы, сбор данных — критерии выбора и метрики эффекта.
 - [Политика конфиденциальности](https://indagor.ru/privacy.html).
 
 ## Контакты
