@@ -334,6 +334,26 @@ footer a:hover{color:var(--gold2)}
  .klondayk-panel{padding:28px 22px}.klondayk-visual{min-height:180px}
  .contact{padding:85px 0}.footer-inner{justify-content:center;text-align:center}
 }
+
+/* cookie-баннер */
+body.has-cookie{padding-bottom:118px}
+.cookie{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(8,9,9,.97);border-top:1px solid rgba(214,173,99,.4);backdrop-filter:blur(14px)}
+.cookie[hidden]{display:none}
+.cookie-inner{display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;padding:18px 0}
+.cookie-text{margin:0;font-size:12.5px;line-height:1.65;color:#a7a69f;max-width:660px}
+.cookie-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cookie-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 26px;border:1px solid var(--gold);background:linear-gradient(135deg,#f2d99d,#c89b4c);color:#17130b;font:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:transform .2s,filter .2s}
+.cookie-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.cookie-btn:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+.cookie-link{font-size:12px;color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(214,173,99,.45);padding:12px 0;line-height:20px}
+.cookie-link:hover{color:#fff}
+@media(max-width:600px){
+ body.has-cookie{padding-bottom:172px}
+ .cookie-inner{padding:14px 0;gap:12px}
+ .cookie-text{font-size:12px}
+ .cookie-actions{width:100%;justify-content:space-between}
+}
+
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -438,6 +458,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </div>
  <div class="footer-inner footer-bottom"><span>INTELLIGENT DIGITAL SYSTEMS</span><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a><span>© 2026 INDAGOR. Все права защищены.</span></div>
 </div></footer>
+<!-- cookie-баннер -->
+<aside class="cookie" id="cookieBar" aria-label="Согласие на использование cookie" hidden>
+ <div class="container cookie-inner">
+  <p class="cookie-text">Мы используем файлы cookie и сервисы аналитики для улучшения работы сайта. Продолжая пользоваться сайтом, вы соглашаетесь с этим.</p>
+  <div class="cookie-actions">
+   <a class="cookie-link" href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
+   <button type="button" class="cookie-btn" id="cookieAccept">Принять</button>
+  </div>
+ </div>
+</aside>
+<script>
+(function(){
+ var KEY='indagor_cookie_consent';
+ var saved=false;
+ try{saved=localStorage.getItem(KEY)==='1';}catch(e){}
+ if(saved){return;}
+ var bar=document.getElementById('cookieBar');
+ if(!bar){return;}
+ bar.hidden=false;
+ document.body.classList.add('has-cookie');
+ var btn=document.getElementById('cookieAccept');
+ if(btn){
+  btn.addEventListener('click',function(){
+   try{localStorage.setItem(KEY,'1');}catch(e){}
+   bar.hidden=true;
+   document.body.classList.remove('has-cookie');
+  });
+ }
+})();
+</script>
 <script>
 (function(){
   var root=document.documentElement;
