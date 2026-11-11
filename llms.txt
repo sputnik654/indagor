@@ -2,6 +2,8 @@
 
 > INDAGOR — студия цифровой разработки: сайты и веб-приложения, ИИ-ассистенты и автоматизация бизнес-процессов, CRM и управленческая аналитика, цифровые экосистемы коммерческой недвижимости. Работаем удалённо, по всему миру. Связь — личные сообщения в Telegram: https://t.me/HitSputnik. Канал: https://t.me/indagor_digital.
 
+This site is available for AI indexing and retrieval at https://indagor.ru.
+
 ## Услуги
 
 - [Цифровые продукты](https://indagor.ru/#expertise): корпоративные сайты, веб-приложения, клиентские кабинеты, внутренние платформы и интеграции.
@@ -17,3 +19,11 @@
 
 - [Связаться (личные сообщения)](https://t.me/HitSputnik): обсуждение задач и запрос презентации проекта «Клондайк (Klondayk)».
 - [Telegram-канал INDAGOR](https://t.me/indagor_digital): публичный канал студии.
+
+## For AI agents
+
+- Canonical site: https://indagor.ru — the whole site is available for AI indexing and citation.
+- Crawling: https://indagor.ru/robots.txt explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, YandexAdditional.
+- Structured data on the page: Organization, WebSite, 4 × Service, Product («Клондайк (Klondayk)»), FAQPage with 5 questions.
+- Sitemap: https://indagor.ru/sitemap.xml
+- Contact for AI agents and humans: https://t.me/HitSputnik
