@@ -235,12 +235,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <style>
 :root{
  --bg:#080909;--panel:#101211;--panel2:#151714;--gold:#d6ad63;--gold2:#f3d99d;
- --white:#f4f1e9;--muted:#a7a69f;--line:rgba(214,173,99,.2);
+ --white:#f4f1e9;--muted:#d1d1d1;--line:rgba(214,173,99,.2);--fs-body:17px;--fs-lead:19px;
  --serif:"Playfair Display",Georgia,"Times New Roman",serif;--sans:Inter,Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--bg);color:var(--white);font-family:var(--sans);line-height:1.65;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--white);font-family:var(--sans);font-size:var(--fs-body);font-weight:400;line-height:1.75;overflow-x:hidden}
 a{color:inherit}
 .container{width:min(1160px,calc(100% - 48px));margin:auto}
 .eyebrow{display:flex;align-items:center;gap:12px;color:var(--gold);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
@@ -265,7 +265,7 @@ header{height:82px;position:sticky;top:0;z-index:20;background:rgba(8,9,9,.86);b
 .hero .eyebrow{margin-bottom:28px}
 h1{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.2vw,58px);line-height:1.1;letter-spacing:.005em;margin:0 0 26px;max-width:760px;text-wrap:balance}
 h1 em{font-style:normal;color:var(--gold2)}
-.hero-lead{font-size:17px;color:#c1c0b9;max-width:570px;line-height:1.8;margin:0 0 34px}
+.hero-lead{font-size:var(--fs-lead);color:#dcd9d0;max-width:610px;line-height:1.75;margin:0 0 34px}
 .hero-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .text-link{font-size:12px;color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(214,173,99,.45);padding:12px 0;display:inline-block;line-height:20px}
 .hero-note{margin-top:68px;display:flex;gap:30px;flex-wrap:wrap;color:#9e9b91;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
@@ -274,16 +274,18 @@ h1 em{font-style:normal;color:var(--gold2)}
 .section{padding:112px 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:52px}
 .section-head h2{font-family:var(--serif);font-size:clamp(34px,4vw,52px);font-weight:400;line-height:1.1;margin:15px 0 0;max-width:600px}
-.section-intro{max-width:390px;color:var(--muted);font-size:14px;margin:0}
+.section-intro{max-width:430px;color:var(--muted);font-size:var(--fs-body);line-height:1.7;margin:0}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .card{position:relative;min-height:245px;padding:34px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.008));border:1px solid rgba(255,255,255,.09);transition:border-color .25s,transform .25s;overflow:hidden}
 .card:has(.card-more){cursor:pointer}
 .card-more::after{content:"";position:absolute;inset:0;z-index:1}
 .card-more:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
 .card:hover{border-color:rgba(214,173,99,.6);transform:translateY(-4px)}
+.card-icon{display:block;width:46px;height:46px;color:var(--gold);margin:0 0 20px}
+.card-icon svg{width:100%;height:100%;display:block}
 .card-num{font-family:var(--serif);font-size:14px;color:var(--gold);letter-spacing:.12em}
 .card h3{font-family:var(--serif);font-weight:400;font-size:25px;margin:24px 0 10px}
-.card p{color:var(--muted);font-size:13px;max-width:440px;margin:0}
+.card p{color:var(--muted);font-size:var(--fs-body);max-width:470px;margin:0;line-height:1.7}
 .card-arrow{position:absolute;right:30px;top:28px;color:var(--gold);font-size:20px}
 .card-more{display:inline-block;margin-top:14px;font-size:12px;color:var(--gold2);border-bottom:1px solid rgba(214,173,99,.45);padding:12px 0;line-height:20px}
 .card-more:hover{color:#fff;border-color:var(--gold)}
@@ -295,34 +297,32 @@ h1 em{font-style:normal;color:var(--gold2)}
 .klondayk{padding:0 0 112px}
 .klondayk-panel{border:1px solid rgba(214,173,99,.35);background:radial-gradient(ellipse at 90% 20%,rgba(214,173,99,.12),transparent 42%),#10120f;padding:54px;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
 .klondayk h2{font-family:var(--serif);font-size:clamp(34px,4vw,48px);font-weight:400;margin:16px 0}
-.klondayk p{color:var(--muted);font-size:14px;max-width:580px}
-.klondayk-visual{min-height:230px;display:grid;place-items:center;position:relative}
-.klondayk-visual:before,.klondayk-visual:after{content:"";position:absolute;width:190px;height:190px;border:1px solid rgba(214,173,99,.35);transform:rotate(45deg)}
-.klondayk-visual:after{width:145px;height:145px;border-color:rgba(214,173,99,.65)}
-.klondayk-symbol{z-index:1;color:var(--gold2);font-family:var(--serif);font-size:38px;letter-spacing:.12em}
+.klondayk p{color:var(--muted);font-size:var(--fs-body);line-height:1.7;max-width:580px}
+.klondayk-visual{position:relative;margin:0;min-height:0}
+.klondayk-visual img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid rgba(214,173,99,.4);box-shadow:0 26px 70px rgba(0,0,0,.55)}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .step{border-top:1px solid var(--line);padding-top:22px}
 .step b{font-family:var(--serif);font-size:26px;color:var(--gold);font-weight:400}
 .step h3{font-size:15px;margin:14px 0 8px}
-.step p{font-size:13px;color:var(--muted);margin:0}
+.step p{font-size:var(--fs-body);color:var(--muted);margin:0;line-height:1.7}
 .contact{padding:110px 0 120px;text-align:center;position:relative;overflow:hidden}
 .contact:before{content:"";position:absolute;width:600px;height:600px;border:1px solid rgba(214,173,99,.08);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 70px rgba(214,173,99,.018),0 0 0 140px rgba(214,173,99,.012);pointer-events:none}
 .contact .eyebrow{justify-content:center}
 .contact h2{font-family:var(--serif);font-size:clamp(40px,5vw,62px);font-weight:400;line-height:1.08;margin:22px 0}
-.contact p{color:var(--muted);font-size:15px;margin:0 auto 32px;max-width:520px}
+.contact p{color:var(--muted);font-size:var(--fs-body);line-height:1.7;margin:0 auto 32px;max-width:520px}
 .contact .btn{position:relative}
-footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0;color:#85837c;font-size:10px;letter-spacing:.1em}
+footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0;color:#9c998f;font-size:11px;letter-spacing:.1em}
 footer a{color:var(--gold);text-decoration:none}
 footer a:hover{color:var(--gold2)}
 .footer-nav{display:flex;flex-wrap:wrap;gap:0 20px}
 .footer-inner>a{line-height:20px;padding:12px 0;display:inline-block}
 .footer-bottom{margin-top:2px;font-size:9px;color:#6f6d67}
-.footer-nav a{color:#a7a69f;line-height:20px;padding:12px 0;display:inline-block}
+.footer-nav a{color:#c9c6bd;line-height:20px;padding:12px 0;display:inline-block}
 .footer-nav a:hover{color:var(--gold2)}
 .faq-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0 44px}
 .faq-item{border-top:1px solid var(--line);padding:28px 0}
 .faq-item h3{font-family:var(--serif);font-weight:400;font-size:20px;line-height:1.3;margin:0 0 12px;color:var(--gold2)}
-.faq-item p{color:var(--muted);font-size:13.5px;margin:0;line-height:1.7}
+.faq-item p{color:var(--muted);font-size:var(--fs-body);margin:0;line-height:1.75}
 @media(max-width:800px){.faq-list{grid-template-columns:1fr;gap:0}}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 .footer-brand{color:var(--gold);letter-spacing:.2em}
@@ -342,7 +342,7 @@ footer a:hover{color:var(--gold2)}
 @media(max-width:560px){
  .container{width:min(100% - 36px,1160px)}header{height:72px}.nav-links{top:71px}
  .brand-name{font-size:16px}.brand-sub{font-size:7px}.hero{min-height:620px}
- h1{font-size:28px;line-height:1.15}.hero-lead{font-size:15px}.hero-note{gap:14px;margin-top:38px}
+ h1{font-size:28px;line-height:1.15}.hero-lead{font-size:var(--fs-lead)}.hero-note{gap:14px;margin-top:38px}
  .grid,.steps{grid-template-columns:1fr}.card{min-height:210px;padding:28px}.section-head{margin-bottom:34px}
  .klondayk-panel{padding:28px 22px}.klondayk-visual{min-height:180px}
  .contact{padding:85px 0}.footer-inner{justify-content:center;text-align:center}
@@ -353,7 +353,7 @@ body.has-cookie{padding-bottom:118px}
 .cookie{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(8,9,9,.97);border-top:1px solid rgba(214,173,99,.4);backdrop-filter:blur(14px)}
 .cookie[hidden]{display:none}
 .cookie-inner{display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;padding:18px 0}
-.cookie-text{margin:0;font-size:12.5px;line-height:1.65;color:#a7a69f;max-width:660px}
+.cookie-text{margin:0;font-size:13.5px;line-height:1.7;color:#c6c3ba;max-width:660px}
 .cookie-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .cookie-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 26px;border:1px solid var(--gold);background:linear-gradient(135deg,#f2d99d,#c89b4c);color:#17130b;font:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:transform .2s,filter .2s}
 .cookie-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
@@ -363,7 +363,7 @@ body.has-cookie{padding-bottom:118px}
 @media(max-width:600px){
  body.has-cookie{padding-bottom:172px}
  .cookie-inner{padding:14px 0;gap:12px}
- .cookie-text{font-size:12px}
+ .cookie-text{font-size:14px}
  .cookie-actions{width:100%;justify-content:space-between}
 }
 
@@ -377,17 +377,22 @@ body.has-cookie{padding-bottom:118px}
 .tgm-close:hover{color:var(--gold2)}
 .tgm-close:focus-visible{outline:2px solid var(--gold2);outline-offset:-2px}
 .tgm-title{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.2;margin:0 0 10px;color:var(--gold2)}
-.tgm-sub{font-size:13px;color:#a7a69f;margin:0 0 22px;line-height:1.6}
+.tgm-sub{font-size:15px;color:#bdbab1;margin:0 0 22px;line-height:1.6}
 .tgm-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:0 18px;font:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none;border:1px solid var(--gold);transition:filter .2s,background .2s}
 .tgm-btn-primary{background:linear-gradient(135deg,#f2d99d,#c89b4c);color:#17130b;margin-bottom:12px}
 .tgm-btn-primary:hover{filter:brightness(1.07)}
 .tgm-btn-copy{background:transparent;color:var(--gold2);border-color:rgba(214,173,99,.45)}
 .tgm-btn-copy:hover{background:rgba(214,173,99,.08)}
 .tgm-btn:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
-.tgm-hint{font-size:11.5px;line-height:1.6;color:#85837c;margin:16px 0 0}
+.tgm-hint{font-size:12.5px;line-height:1.6;color:#85837c;margin:16px 0 0}
 body.tgm-lock{overflow:hidden}
-@media(max-width:420px){.tgm-dialog{padding:30px 20px 24px}.tgm-title{font-size:22px}.tgm-sub{font-size:12.5px}}
-.footer-note{font-size:10px;line-height:1.6;color:#6f6d67;letter-spacing:.03em;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05)}
+@media(max-width:420px){.tgm-dialog{padding:30px 20px 24px}.tgm-title{font-size:22px}.tgm-sub{font-size:14px}}
+.footer-note{font-size:11.5px;line-height:1.65;color:#6f6d67;letter-spacing:.03em;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05)}
+
+/* ===== Читаемость и визуальные акценты ===== */
+img{max-width:100%;height:auto;display:block}
+p,li{font-size:var(--fs-body);line-height:1.75}
+@media(max-width:800px){:root{--fs-body:16px;--fs-lead:17px}}
 </style>
 </head>
 <body>
@@ -425,10 +430,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
    <div class="section-head reveal"><div><div class="eyebrow">Что мы создаём</div><h2>Технологии, которые<br>работают на бизнес.</h2></div><p class="section-intro">От точечного инструмента до цифровой инфраструктуры — подбираем архитектуру под задачу, а не под модный стек.</p></div>
    <div class="grid">
-    <article class="card reveal"><span class="card-num">01 / DIGITAL PRODUCTS</span><span class="card-arrow">↗</span><h3>Цифровые продукты</h3><p>Корпоративные сайты, веб-приложения, клиентские кабинеты, внутренние платформы и интеграции.</p><a class="card-more" href="/services/web-development/" aria-label="Подробнее: цифровые продукты и веб-разработка">Подробнее <span aria-hidden="true">→</span></a></article>
-    <article class="card reveal"><span class="card-num">02 / AI &amp; AUTOMATION</span><span class="card-arrow">↗</span><h3>AI и автоматизация</h3><p>Интеллектуальные ассистенты, боты и автоматизация обработки обращений, документов и повторяющихся операций.</p><a class="card-more" href="/services/ai-automation/" aria-label="Подробнее: AI и автоматизация">Подробнее <span aria-hidden="true">→</span></a></article>
-    <article class="card reveal"><span class="card-num">03 / DATA &amp; MANAGEMENT</span><span class="card-arrow">↗</span><h3>CRM, аналитика и управление</h3><p>Системы учёта заявок, интеграция сервисов, управленческая отчётность и визуализация данных.</p><a class="card-more" href="/services/crm-analytics/" aria-label="Подробнее: CRM и аналитика">Подробнее <span aria-hidden="true">→</span></a></article>
-    <article class="card reveal"><span class="card-num">04 / REAL ESTATE</span><span class="card-arrow">↗</span><h3>Цифровые экосистемы недвижимости</h3><p>Решения для торговых и бизнес-центров: арендаторы, помещения, заявки, сервисы и операционные процессы.</p></article>
+    <article class="card reveal"><span class="card-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" aria-hidden="true" focusable="false"><rect x="3" y="6" width="26" height="20"/><path d="M3 12h26M7 9h.01M11 9h.01"/><path d="M12.5 17.5 10 20l2.5 2.5M19.5 17.5 22 20l-2.5 2.5"/></svg></span><span class="card-num">01 / DIGITAL PRODUCTS</span><span class="card-arrow">↗</span><h3>Цифровые продукты</h3><p>Корпоративные сайты, веб-приложения, клиентские кабинеты, внутренние платформы и интеграции.</p><a class="card-more" href="/services/web-development/" aria-label="Подробнее: цифровые продукты и веб-разработка">Подробнее <span aria-hidden="true">→</span></a></article>
+    <article class="card reveal"><span class="card-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" aria-hidden="true" focusable="false"><rect x="9" y="9" width="14" height="14"/><circle cx="16" cy="16" r="3"/><path d="M13 3v6M19 3v6M13 23v6M19 23v6M3 13h6M3 19h6M23 13h6M23 19h6"/></svg></span><span class="card-num">02 / AI &amp; AUTOMATION</span><span class="card-arrow">↗</span><h3>AI и автоматизация</h3><p>Интеллектуальные ассистенты, боты и автоматизация обработки обращений, документов и повторяющихся операций.</p><a class="card-more" href="/services/ai-automation/" aria-label="Подробнее: AI и автоматизация">Подробнее <span aria-hidden="true">→</span></a></article>
+    <article class="card reveal"><span class="card-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M4 28V16M11 28V9M18 28V20M25 28V12"/><path d="M3 12l7-5 7 4 7-6"/><path d="M3 28h26"/></svg></span><span class="card-num">03 / DATA &amp; MANAGEMENT</span><span class="card-arrow">↗</span><h3>CRM, аналитика и управление</h3><p>Системы учёта заявок, интеграция сервисов, управленческая отчётность и визуализация данных.</p><a class="card-more" href="/services/crm-analytics/" aria-label="Подробнее: CRM и аналитика">Подробнее <span aria-hidden="true">→</span></a></article>
+    <article class="card reveal"><span class="card-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M5 28V10l8-4v22M13 28V13l9-4v19M22 28V16l6-2v14"/><path d="M8 13h2M8 18h2M8 23h2M17 16h2M17 21h2"/><path d="M3 28h26"/></svg></span><span class="card-num">04 / REAL ESTATE</span><span class="card-arrow">↗</span><h3>Цифровые экосистемы недвижимости</h3><p>Решения для торговых и бизнес-центров: арендаторы, помещения, заявки, сервисы и операционные процессы.</p></article>
    </div>
   </div>
  </section>
@@ -445,7 +450,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <div class="klondayk-panel reveal">
     <div><div class="eyebrow">Авторская разработка</div><h2>Клондайк (Klondayk) — платформа для коммерческой недвижимости.</h2><p>Клондайк — авторская разработка INDAGOR: цифровая платформа для комплексного управления коммерческой недвижимостью. Один интерфейс для объекта, арендаторов, заявок и операционных процессов; состав модулей определяется задачами конкретного объекта.</p><a class="text-link" href="/klondayk/">Подробнее о платформе</a>
      <a class="text-link" href="https://t.me/HitSputnik" target="_blank" rel="noopener">Запросить презентацию проекта ↗</a></div>
-    <div class="klondayk-visual" aria-hidden="true"><span class="klondayk-symbol">K.</span></div>
+    <figure class="klondayk-visual"><img src="/assets/klondayk-visual.webp" alt="Абстрактная чёрно-золотая 3D-иллюстрация: изометрический куб, орбиты данных и панели интерфейса — символ платформы Клондайк" width="1000" height="750" loading="lazy" decoding="async"></figure>
    </div>
   </div>
  </section>
