@@ -184,13 +184,39 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 
 @media(max-width:640px){.brand-img{width:46px;height:46px;margin-right:14px}.brand-name{font-size:22px}}
 
-@media(max-width:820px) and (min-width:641px){.brand-name{font-size:20px}.brand-img{width:44px;height:44px;margin-right:12px}.brand{flex:1 1 auto;min-width:0}.nav{font-size:12.5px;gap:14px;flex:0 0 auto}}
+
+/* ===== Навигация: подменю «Услуги» + мобильный бургер ===== */
+.nav-drop{position:relative}
+.nav-drop-btn{font:inherit;font-size:14.5px;letter-spacing:.03em;color:#d8d4ca;background:none;border:0;padding:12px 0;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.nav-drop-btn:hover,.nav-drop-btn[aria-expanded="true"]{color:var(--gold2)}
+.nav-drop-btn .caret{font-size:9px;line-height:1;transform:translateY(1px);transition:transform .2s}
+.nav-drop.open .nav-drop-btn .caret{transform:rotate(180deg) translateY(-1px)}
+.nav-sub{position:absolute;top:calc(100% + 24px);left:-16px;min-width:246px;background:#0c0e0c;border:1px solid rgba(214,173,99,.3);padding:8px 0;display:none;z-index:60;box-shadow:0 20px 46px rgba(0,0,0,.6)}
+.nav-sub a{display:block;padding:11px 18px;font-size:13.5px;color:#d8d4ca;white-space:nowrap;line-height:1.4}
+.nav-sub a:hover{background:rgba(214,173,99,.09);color:var(--gold2)}
+.nav-drop:hover .nav-sub,.nav-drop:focus-within .nav-sub,.nav-drop.open .nav-sub{display:block}
+.menu-btn{display:none;align-items:center;justify-content:center;background:none;border:1px solid rgba(214,173,99,.35);color:var(--gold);padding:0 16px;min-height:44px;min-width:64px;font:inherit;font-size:11px;letter-spacing:.12em;cursor:pointer}
+.menu-btn:hover{color:var(--gold2)}
+@media(max-width:820px){
+ .nav{display:none;position:absolute;top:100%;left:0;right:0;background:#0c0e0c;padding:14px 24px 20px;flex-direction:column;align-items:flex-start;gap:0;border-bottom:1px solid rgba(255,255,255,.08);z-index:60}
+ .nav.open{display:flex}
+ .nav>a{padding:12px 0;line-height:20px;display:block;white-space:nowrap}
+ .menu-btn{display:inline-flex}
+ .nav-drop{width:100%}
+ .nav-drop-btn{width:100%;justify-content:space-between;padding:12px 0;line-height:20px;text-align:left}
+ .nav-drop:hover .nav-sub{display:none}
+ .nav-sub{position:static;display:none;border:0;border-left:1px solid rgba(214,173,99,.3);margin:2px 0 4px 2px;padding:0 0 0 14px;min-width:0;box-shadow:none;background:transparent}
+ .nav-sub a{padding:9px 0;white-space:normal}
+ .nav-drop.open .nav-sub{display:block}
+}
+
 </style>
 </head>
 <body>
 <header><div class="container">
  <a class="brand" href="/" aria-label="INDAGOR — на главную"><img class="brand-img" src="/assets/brand-logo.webp" alt="" width="44" height="44" decoding="async" aria-hidden="true"><span class="brand-name">INDAGOR</span></a>
- <nav class="nav" aria-label="Навигация"><a href="/">Главная</a><a href="/about/">О студии</a><a href="/klondayk/">Клондайк</a><a href="/services/ai-automation/">AI и автоматизация</a></nav>
+ <nav class="nav" id="navLinks" aria-label="Навигация"><a href="/#expertise">Компетенции</a><a href="/#approach">Подход</a><a href="/klondayk/">Клондайк</a><div class="nav-drop" id="navDropServices"><button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true" aria-controls="navServicesSub">Услуги <span class="caret" aria-hidden="true">▾</span></button><div class="nav-sub" id="navServicesSub" role="group" aria-label="Услуги"><a href="/services/web-development/">Веб-разработка</a><a href="/services/ai-automation/">AI и автоматизация</a><a href="/services/crm-analytics/">CRM и аналитика</a></div></div><a href="/#contact">Контакт</a></nav>
+ <button type="button" class="menu-btn" id="menuBtn" aria-label="Открыть меню" aria-expanded="false" aria-controls="navLinks">МЕНЮ</button>
 </div></header>
 
 <main>
@@ -320,6 +346,28 @@ p,li{font-size:var(--fs-body);line-height:1.75}
    }else{fallback();}
   });
  }
+})();
+</script>
+<script>
+(function(){
+ var menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('navLinks'),
+     drop=document.getElementById('navDropServices');
+ if(!menuBtn||!nav){return;}
+ var dropBtn=drop?drop.querySelector('.nav-drop-btn'):null;
+ function setDrop(open){if(!drop||!dropBtn){return;}drop.classList.toggle('open',open);dropBtn.setAttribute('aria-expanded',open?'true':'false');}
+ function setMenu(open){nav.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',open?'true':'false');menuBtn.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню');if(!open){setDrop(false);}}
+ menuBtn.addEventListener('click',function(){setMenu(!nav.classList.contains('open'));});
+ if(dropBtn){dropBtn.addEventListener('click',function(e){e.preventDefault();setDrop(!drop.classList.contains('open'));});}
+ document.addEventListener('click',function(e){
+  if(nav.classList.contains('open')&&!nav.contains(e.target)&&!menuBtn.contains(e.target)){setMenu(false);}
+  if(drop&&drop.classList.contains('open')&&!drop.contains(e.target)){setDrop(false);}
+ });
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+   if(drop&&drop.classList.contains('open')){setDrop(false);if(dropBtn){dropBtn.focus();}}
+   else if(nav.classList.contains('open')){setMenu(false);menuBtn.focus();}
+  }
+ });
 })();
 </script>
 </body>
