@@ -223,11 +223,21 @@ body.tgm-lock{overflow:hidden}
 /* баннер-визуал под H1 */
 .banner{margin:0;padding:32px 0 0}
 .banner img{width:100%;height:auto;display:block;border:1px solid rgba(214,173,99,.28);box-shadow:0 28px 70px rgba(0,0,0,.5)}
-/* постер-визуализация: оригинальные пропорции, без обрезки */
-.poster{margin:0;padding:42px 0 0}
+/* постер-визуализация: оригинальные пропорции, без обрезки, с ambilight */
+.poster{margin:0;padding:64px 0 56px;background:transparent;overflow:hidden}
 .poster .container{display:flex;justify-content:center}
-.poster img{width:100%;max-width:600px;height:auto;display:block;border:1px solid rgba(214,173,99,.42);box-shadow:0 30px 76px rgba(0,0,0,.6),0 0 54px rgba(214,173,99,.14)}
-@media(max-width:640px){.banner{padding:22px 0 0}.poster{padding:28px 0 0}.poster .container{width:100%;max-width:none;padding:0}.poster img{max-width:100%;border-left:0;border-right:0}}
+.image-glow-wrapper{position:relative;width:100%;max-width:600px;isolation:isolate}
+.image-glow-wrapper::before{content:"";position:absolute;inset:-14px;z-index:0;pointer-events:none;
+ background:url("/assets/web-dev-poster-city.webp") center/cover no-repeat;
+ filter:blur(46px) saturate(1.2) brightness(.95);
+ opacity:.6}
+.image-glow-wrapper img{position:relative;z-index:1;display:block;width:100%;height:auto;
+ border:1px solid rgba(214,173,99,.6);
+ box-shadow:0 30px 76px rgba(0,0,0,.65),0 0 46px rgba(214,173,99,.22),0 0 110px 18px rgba(214,173,99,.08)}
+@media(max-width:640px){.banner{padding:22px 0 0}.poster{padding:28px 0 0}.poster .container{width:100%;max-width:none;padding:0}
+ .poster .container{padding:0 15px}
+ .image-glow-wrapper{max-width:none;width:100%;margin:0}
+ .image-glow-wrapper::before{inset:-9px;filter:blur(28px) saturate(1.2);opacity:.62}}
 
 /* ===== Читаемость и визуальные акценты ===== */
 img{max-width:100%;height:auto;display:block}
@@ -283,7 +293,9 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   </div>
  </div></section>
 <figure class="poster"><div class="container">
-  <img src="/assets/web-dev-poster.webp" alt="Разработка цифровых продуктов INDAGOR: золотой город, планета и голографические панели" width="836" height="941" loading="eager" fetchpriority="high" decoding="async">
+  <div class="image-glow-wrapper">
+   <img src="/assets/web-dev-poster-city.webp" alt="Разработка цифровых продуктов INDAGOR: золотой город, планета и голографические панели" width="833" height="941" loading="eager" fetchpriority="high" decoding="async">
+  </div>
 </div></figure>
 
 
