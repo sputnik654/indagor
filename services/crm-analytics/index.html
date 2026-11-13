@@ -221,9 +221,7 @@ body.tgm-lock{overflow:hidden}
 .footer-note{font-size:11.5px;line-height:1.65;color:#6f6d67;letter-spacing:.03em;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05)}
 
 /* баннер-визуал под H1 */
-.banner{margin:0;padding:32px 0 0}
-.banner img{width:100%;height:auto;display:block;border:1px solid rgba(214,173,99,.28);box-shadow:0 28px 70px rgba(0,0,0,.5)}
-@media(max-width:640px){.banner{padding:22px 0 0}}
+/* постер-визуализация: оригинальные пропорции, без обрезки */
 
 /* ===== Читаемость и визуальные акценты ===== */
 img{max-width:100%;height:auto;display:block}
@@ -282,6 +280,16 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   box-shadow:0 0 34px 12px rgba(214,173,99,.45),0 0 80px 24px rgba(214,173,99,.2);
   filter:drop-shadow(0 14px 14px rgba(0,0,0,.85))}
 }
+
+/* постер CRM: геометрия скопирована с /services/web-development/ (эталон) */
+.poster{margin:0;padding:56px 0 40px;background:transparent}
+.poster .container{display:flex;justify-content:center}
+.poster .floating-image{width:100%;max-width:640px;--glow-img:url("/assets/crm-analytics-hero.webp")}
+@media(max-width:640px){
+ .poster{padding:30px 0 0}
+ .poster .container{width:100%;max-width:none;padding:0}
+ .poster .floating-image{width:100%;padding:15px;margin-bottom:12px}
+}
 </style>
 </head>
 <body>
@@ -302,8 +310,10 @@ p,li{font-size:var(--fs-body);line-height:1.75}
    <a class="link" href="#tasks">Что делаем</a>
   </div>
  </div></section>
-<figure class="banner"><div class="container">
-  <img src="/assets/banner-crm-analytics.webp" alt="Абстрактная чёрно-золотая иллюстрация дашборда с графиками и воронкой — визуализация CRM и управленческой аналитики" width="1600" height="640" loading="eager" fetchpriority="high" decoding="async">
+<figure class="poster"><div class="container">
+  <div class="floating-image">
+   <img src="/assets/crm-analytics-hero.webp" alt="CRM и управленческая аналитика INDAGOR" width="835" height="933" loading="eager" fetchpriority="high" decoding="async">
+  </div>
 </div></figure>
 
 
