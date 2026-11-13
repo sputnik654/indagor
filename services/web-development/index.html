@@ -223,8 +223,11 @@ body.tgm-lock{overflow:hidden}
 /* баннер-визуал под H1 */
 .banner{margin:0;padding:32px 0 0}
 .banner img{width:100%;height:auto;display:block;border:1px solid rgba(214,173,99,.28);box-shadow:0 28px 70px rgba(0,0,0,.5)}
-.service-banner-img{border-color:rgba(214,173,99,.38)!important;box-shadow:0 28px 70px rgba(0,0,0,.55),0 0 46px rgba(214,173,99,.12)!important}
-@media(max-width:640px){.banner{padding:22px 0 0}}
+/* постер-визуализация: оригинальные пропорции, без обрезки */
+.poster{margin:0;padding:42px 0 0}
+.poster .container{display:flex;justify-content:center}
+.poster img{width:100%;max-width:600px;height:auto;display:block;border:1px solid rgba(214,173,99,.42);box-shadow:0 30px 76px rgba(0,0,0,.6),0 0 54px rgba(214,173,99,.14)}
+@media(max-width:640px){.banner{padding:22px 0 0}.poster{padding:28px 0 0}.poster .container{width:100%;max-width:none;padding:0}.poster img{max-width:100%;border-left:0;border-right:0}}
 
 /* ===== Читаемость и визуальные акценты ===== */
 img{max-width:100%;height:auto;display:block}
@@ -279,8 +282,8 @@ p,li{font-size:var(--fs-body);line-height:1.75}
    <a class="link" href="#tasks">Что разрабатываем</a>
   </div>
  </div></section>
-<figure class="banner"><div class="container">
-  <img class="service-banner-img" src="/assets/web-dev-hero.webp" alt="Разработка цифровых продуктов INDAGOR" width="1200" height="675" loading="eager" fetchpriority="high" decoding="async">
+<figure class="poster"><div class="container">
+  <img src="/assets/web-dev-poster.webp" alt="Разработка цифровых продуктов INDAGOR: золотой город, планета и голографические панели" width="836" height="941" loading="eager" fetchpriority="high" decoding="async">
 </div></figure>
 
 
