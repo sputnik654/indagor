@@ -123,7 +123,7 @@ body.tgm-lock{overflow:hidden}
 
 
 /* ===== Универсальный класс «парящее изображение» (.floating-image) ===== */
-.floating-image{position:relative;perspective:1000px;isolation:isolate;--glow-img:none;padding:20px}
+.floating-image{position:relative;perspective:1000px;isolation:isolate;--glow-img:none;padding:20px;box-sizing:border-box}
 .floating-image::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:16px;
  background-image:var(--glow-img);background-size:cover;background-position:center;filter:blur(40px);opacity:.6}
 .floating-image img{position:relative;z-index:1;display:block;width:100%;height:auto;

@@ -426,6 +426,14 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  .nav-drop.open .nav-sub{display:block}
 }
 @media(max-width:640px){
+/* Клондайк: картинка крупнее кнопки, но с полем под золотое свечение */
+ .klondayk-panel{padding:26px 0 20px;grid-template-columns:minmax(0,1fr)}
+ .klondayk-panel>div,
+ .klondayk-visual{min-width:0}
+ .klondayk-panel>div:first-child{padding:0 22px}
+ .klondayk-visual{padding:0;margin:0;min-height:0}
+ .klondayk-visual .floating-image{width:100%;max-width:none;padding:10px;margin-bottom:8px}
+ .klondayk-visual img{width:100%;height:auto;aspect-ratio:1/1}
  .brand-img{width:46px;height:46px;margin-right:14px}
  .brand-name{font-size:22px}
  .brand-sub{font-size:8px;letter-spacing:.13em;margin-top:3px;white-space:nowrap}
@@ -434,7 +442,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 }
 
 /* ===== Универсальный класс «парящее изображение» (.floating-image) ===== */
-.floating-image{position:relative;perspective:1000px;isolation:isolate;--glow-img:none;padding:20px}
+.floating-image{position:relative;perspective:1000px;isolation:isolate;--glow-img:none;padding:20px;box-sizing:border-box}
 .floating-image::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:16px;
  background-image:var(--glow-img);background-size:cover;background-position:center;filter:blur(40px);opacity:.6}
 .floating-image img{position:relative;z-index:1;display:block;width:100%;height:auto;
