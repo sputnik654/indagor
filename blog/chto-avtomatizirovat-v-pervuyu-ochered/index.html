@@ -175,7 +175,7 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:24px 0;color:#9c998f;f
 .cookie-link{font-size:12px;color:var(--gold2);border-bottom:1px solid rgba(214,173,99,.45);padding:12px 0;line-height:20px}
 @media(max-width:900px){.grid,.steps{grid-template-columns:1fr 1fr}.faq-list{grid-template-columns:1fr;gap:0}}
 @media(max-width:640px){.grid,.steps{grid-template-columns:1fr}.nav{display:none}.hero{padding:20px 0 48px}h1{font-size:28px}
- body.has-cookie{padding-bottom:172px}.cookie-inner{padding:14px 0;gap:12px}.cookie-actions{width:100%;justify-content:space-between}}
+ body.has-cookie{padding-bottom:196px}.cookie-inner{padding:14px 0;gap:12px}.cookie-actions{width:100%;justify-content:space-between}}
 
 .article{max-width:760px}
 .article-title{font-size:clamp(28px,3.6vw,44px);line-height:1.18;margin:0 0 18px}
@@ -290,6 +290,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  .poster .floating-image{width:100%;padding:15px;margin-bottom:0}
 }
 </style>
+<script defer src="/assets/analytics.js"></script>
 </head>
 <body>
 <header><div class="container">
@@ -438,28 +439,13 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 
 <aside class="cookie" id="cookieBar" aria-label="Согласие на использование cookie" hidden>
  <div class="container cookie-inner">
-  <p class="cookie-text">Мы используем файлы cookie и сервисы аналитики для улучшения работы сайта. Продолжая пользоваться сайтом, вы соглашаетесь с этим.</p>
+  <p class="cookie-text">Мы используем файлы cookie и сервисы аналитики. Аналитика включается только после вашего согласия — до этого сторонние счётчики не загружаются.</p>
   <div class="cookie-actions">
    <a class="cookie-link" href="/privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
    <button type="button" class="cookie-btn" id="cookieAccept">Принять</button>
   </div>
  </div>
 </aside>
-<script>
-(function(){
- var KEY='indagor_cookie_consent';
- try{if(localStorage.getItem(KEY)==='1'){return;}}catch(e){}
- var bar=document.getElementById('cookieBar');
- if(!bar){return;}
- bar.hidden=false;
- document.body.classList.add('has-cookie');
- var btn=document.getElementById('cookieAccept');
- if(btn){btn.addEventListener('click',function(){
-   try{localStorage.setItem(KEY,'1');}catch(e){}
-   bar.hidden=true;document.body.classList.remove('has-cookie');
- });}
-})();
-</script>
 <!-- Модальное окно Telegram -->
 <div class="tgm-overlay" id="tgModal" role="dialog" aria-modal="true" aria-labelledby="tgModalTitle">
  <div class="tgm-dialog">

@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080909">
 <title>Юридическая информация и оферта — INDAGOR</title>
+<meta property="og:title" content="Юридическая информация и оферта — INDAGOR">
+<meta property="og:description" content="Статус размещённой информации и цен, состав базового пакета внедрения платформы и порядок фиксации работ в договоре с Заказчиком.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://indagor.ru/offer.html">
+<meta property="og:site_name" content="INDAGOR">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://indagor.ru/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="INDAGOR — Intelligent Digital Systems">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Юридическая информация и оферта — INDAGOR">
+<meta name="twitter:description" content="Статус размещённой информации и цен, состав базового пакета внедрения платформы и порядок фиксации работ в договоре с Заказчиком.">
+<meta name="twitter:image" content="https://indagor.ru/og-image.jpg">
+
 <meta name="description" content="Юридическая информация сайта indagor.ru: статус размещённой информации и цен, состав базового пакета внедрения платформы Клондайк, порядок заключения договора.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://indagor.ru/offer.html">
@@ -145,7 +161,27 @@ body.tgm-lock{overflow:hidden}
   box-shadow:0 0 34px 12px rgba(214,173,99,.45),0 0 80px 24px rgba(214,173,99,.2);
   filter:drop-shadow(0 14px 14px rgba(0,0,0,.85))}
 }
+
+/* cookie-баннер */
+body.has-cookie{padding-bottom:118px}
+.cookie{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(8,9,9,.97);border-top:1px solid rgba(214,173,99,.4);backdrop-filter:blur(14px)}
+.cookie[hidden]{display:none}
+.cookie-inner{display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;padding:18px 0}
+.cookie-text{margin:0;font-size:13.5px;line-height:1.7;color:#c6c3ba;max-width:660px}
+.cookie-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cookie-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 26px;border:1px solid var(--gold);background:linear-gradient(135deg,#f2d99d,#c89b4c);color:#17130b;font:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:transform .2s,filter .2s}
+.cookie-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.cookie-btn:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+.cookie-link{font-size:12px;color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(214,173,99,.45);padding:12px 0;line-height:20px}
+.cookie-link:hover{color:#fff}
+@media(max-width:600px){
+ body.has-cookie{padding-bottom:196px}
+ .cookie-inner{padding:14px 0;gap:12px}
+ .cookie-text{font-size:14px}
+ .cookie-actions{width:100%;justify-content:space-between}
+}
 </style>
+<script defer src="/assets/analytics.js"></script>
 </head>
 <body>
 <header><div class="container">
@@ -327,5 +363,15 @@ body.tgm-lock{overflow:hidden}
  });
 })();
 </script>
+<!-- cookie-баннер -->
+<aside class="cookie" id="cookieBar" aria-label="Согласие на использование cookie" hidden>
+ <div class="container cookie-inner">
+  <p class="cookie-text">Мы используем файлы cookie и сервисы аналитики. Аналитика включается только после вашего согласия — до этого сторонние счётчики не загружаются.</p>
+  <div class="cookie-actions">
+   <a class="cookie-link" href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
+   <button type="button" class="cookie-btn" id="cookieAccept">Принять</button>
+  </div>
+ </div>
+</aside>
 </body>
 </html>

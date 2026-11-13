@@ -15,22 +15,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-<!-- ================= ЯНДЕКС.МЕТРИКА — счётчик 114183010 ================= -->
-<script>
- (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
- m[i].l=1*new Date();
- for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
- k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
- (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
- ym(114183010, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
-</script>
-
-<!-- ================= GOOGLE TAG MANAGER — контейнер GTM-NC82SDKL ================= -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NC82SDKL');</script>
 <title>Разработка сайтов и ИИ-автоматизация для бизнеса — INDAGOR</title>
 <meta name="description" content="Сайты, веб-приложения, ИИ-ассистенты и CRM для бизнеса. Проектируем цифровые продукты, автоматизацию процессов и платформенные решения для коммерческой недвижимости.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -367,7 +351,7 @@ body.has-cookie{padding-bottom:118px}
 .cookie-link{font-size:12px;color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(214,173,99,.45);padding:12px 0;line-height:20px}
 .cookie-link:hover{color:#fff}
 @media(max-width:600px){
- body.has-cookie{padding-bottom:172px}
+ body.has-cookie{padding-bottom:196px}
  .cookie-inner{padding:14px 0;gap:12px}
  .cookie-text{font-size:14px}
  .cookie-actions{width:100%;justify-content:space-between}
@@ -475,14 +459,12 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  .poster .floating-image{width:100%;padding:15px;margin-bottom:12px}
 }
 </style>
+<script defer src="/assets/analytics.js"></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-NC82SDKL"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <!-- Yandex.Metrika counter (noscript) -->
-<noscript><div><img src="https://mc.yandex.ru/watch/114183010" style="position:absolute;left:-9999px" alt=""></div></noscript>
 <!-- End Yandex.Metrika counter -->
 <header>
  <div class="container nav">
@@ -599,33 +581,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- cookie-баннер -->
 <aside class="cookie" id="cookieBar" aria-label="Согласие на использование cookie" hidden>
  <div class="container cookie-inner">
-  <p class="cookie-text">Мы используем файлы cookie и сервисы аналитики для улучшения работы сайта. Продолжая пользоваться сайтом, вы соглашаетесь с этим.</p>
+  <p class="cookie-text">Мы используем файлы cookie и сервисы аналитики. Аналитика включается только после вашего согласия — до этого сторонние счётчики не загружаются.</p>
   <div class="cookie-actions">
    <a class="cookie-link" href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
    <button type="button" class="cookie-btn" id="cookieAccept">Принять</button>
   </div>
  </div>
 </aside>
-<script>
-(function(){
- var KEY='indagor_cookie_consent';
- var saved=false;
- try{saved=localStorage.getItem(KEY)==='1';}catch(e){}
- if(saved){return;}
- var bar=document.getElementById('cookieBar');
- if(!bar){return;}
- bar.hidden=false;
- document.body.classList.add('has-cookie');
- var btn=document.getElementById('cookieAccept');
- if(btn){
-  btn.addEventListener('click',function(){
-   try{localStorage.setItem(KEY,'1');}catch(e){}
-   bar.hidden=true;
-   document.body.classList.remove('has-cookie');
-  });
- }
-})();
-</script>
 <script>
 (function(){
   var root=document.documentElement;
