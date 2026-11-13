@@ -248,9 +248,9 @@ a{color:inherit}
 header{height:82px;position:sticky;top:0;z-index:20;background:rgba(8,9,9,.86);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
 .nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:28px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand-mark{width:38px;height:38px;position:relative;border:1px solid var(--gold);transform:skewY(-8deg);display:grid;place-items:center;color:var(--gold);font-family:var(--serif);font-size:24px}
-.brand-mark:after{content:"";position:absolute;inset:5px -5px -5px 5px;border:1px solid rgba(214,173,99,.55)}
-.brand-name{font-size:19px;letter-spacing:.24em;font-weight:700;color:var(--gold2);line-height:1.15}
+.brand-img{width:44px;height:44px;display:block;flex:0 0 auto;object-fit:contain}
+.brand-name{font-size:22px;letter-spacing:.2em;font-weight:800;color:var(--gold2);line-height:1.15}
+@supports(-webkit-background-clip:text){.brand-name{background:linear-gradient(180deg,#f3d99d 0%,#d6ad63 50%,#b8873b 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}}
 .brand-sub{font-size:8px;letter-spacing:.25em;color:#99958b;margin-top:5px}
 .nav-links{display:flex;align-items:center;gap:30px}
 .nav-links a{font-size:12px;color:#c4c0b6;text-decoration:none;transition:color .2s}
@@ -411,7 +411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header>
  <div class="container nav">
   <a class="brand" href="#top" aria-label="INDAGOR — главная">
-   <span class="brand-mark">I</span><span><span class="brand-name">INDAGOR</span><span class="brand-sub">INTELLIGENT DIGITAL SYSTEMS</span></span>
+   <img class="brand-img" src="/assets/brand-logo.webp" alt="" width="44" height="44" decoding="async" aria-hidden="true"><span><span class="brand-name">INDAGOR</span><span class="brand-sub">INTELLIGENT DIGITAL SYSTEMS</span></span>
   </a>
   <nav class="nav-links" id="navLinks" aria-label="Главная навигация">
    <a href="#expertise">Компетенции</a><a href="#approach">Подход</a><a href="#klondayk">Клондайк (Klondayk)</a><a href="#contact">Контакт</a>
