@@ -278,6 +278,15 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   box-shadow:0 0 34px 12px rgba(214,173,99,.45),0 0 80px 24px rgba(214,173,99,.2);
   filter:drop-shadow(0 14px 14px rgba(0,0,0,.85))}
 }
+
+/* постер в статье: та же структура, что на страницах услуг */
+.poster{margin:0 0 34px;background:transparent}
+.poster .container{display:flex;justify-content:center;width:100%;max-width:none;padding:0}
+.poster .floating-image{width:100%;max-width:640px;--glow-img:url("/assets/blog-automation-hero.webp")}
+@media(max-width:640px){
+ .poster{margin:0 0 26px}
+ .poster .floating-image{width:100%;padding:15px;margin-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -294,6 +303,12 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   <div class="eyebrow eyebrow-top">Автоматизация</div>
   <h1 class="article-title">Что автоматизировать в первую очередь: 5 процессов, которые съедают время бизнеса</h1>
   <div class="meta"><span>11 ноября 2026</span><span>6 минут чтения</span><span>INDAGOR</span></div>
+
+  <figure class="poster"><div class="container">
+   <div class="floating-image">
+    <img src="/assets/blog-automation-hero.webp" alt="Автоматизация бизнеса INDAGOR" width="823" height="939" loading="lazy" decoding="async">
+   </div>
+  </div></figure>
 
   <p>Автоматизация обычно начинается не с выбора сервиса, а с вопроса: <strong>куда именно уходит время</strong>. Пока на этот вопрос нет ответа, любое внедрение — это покупка инструмента без задачи. Ниже — пять процессов, которые чаще всего оказываются узким местом, и признак, по которому можно понять, что пора что-то менять.</p>
 
