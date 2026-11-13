@@ -464,6 +464,16 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   box-shadow:0 0 34px 12px rgba(214,173,99,.45),0 0 80px 24px rgba(214,173,99,.2);
   filter:drop-shadow(0 14px 14px rgba(0,0,0,.85))}
 }
+
+/* постер на главной (между компетенциями и «Наш принцип») */
+.poster{margin:0;padding:8px 0 56px;background:transparent}
+.poster .container{display:flex;justify-content:center}
+.poster .floating-image{width:100%;max-width:640px;--glow-img:url("/assets/home-manifesto-hero.webp")}
+@media(max-width:640px){
+ .poster{padding:30px 0 34px}
+ .poster .container{width:100%;max-width:none;padding:0}
+ .poster .floating-image{width:100%;padding:15px;margin-bottom:12px}
+}
 </style>
 </head>
 <body>
@@ -527,6 +537,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    </div>
   </div>
  </section>
+
+ <!-- постер между компетенциями и «Наш принцип» -->
+ <figure class="poster"><div class="container">
+  <div class="floating-image">
+   <img src="/assets/home-manifesto-hero.webp" alt="Архитектура цифровых систем INDAGOR" width="1000" height="1000" loading="lazy" decoding="async">
+  </div>
+ </div></figure>
 
  <section class="manifesto" id="approach">
   <div class="container manifesto-inner">
