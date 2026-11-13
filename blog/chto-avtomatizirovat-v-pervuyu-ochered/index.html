@@ -260,18 +260,23 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 .floating-image::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:16px;
  background-image:var(--glow-img);background-size:cover;background-position:center;filter:blur(40px);opacity:.6}
 .floating-image img{position:relative;z-index:1;display:block;width:100%;height:auto;
- border:1px solid rgba(214,173,99,.5);border-radius:8px;
- box-shadow:0 30px 60px rgba(0,0,0,.9),0 0 40px rgba(214,173,99,.2),0 20px 48px -10px rgba(214,173,99,.18);
+ border:1px solid rgba(243,217,157,.7);border-radius:8px;
+ box-shadow:0 0 40px 10px rgba(214,173,99,.35),0 0 100px 30px rgba(214,173,99,.15);
+ filter:drop-shadow(0 20px 20px rgba(0,0,0,.8));
  transform:translateY(-10px) rotateX(1deg) rotateY(-1deg);
- transition:transform .4s ease,box-shadow .4s ease}
+ transition:transform .4s ease,box-shadow .4s ease,filter .4s ease}
 @media(min-width:901px){
- .floating-image:hover img{transform:translateY(-20px) rotateX(2deg) rotateY(-2deg) scale(1.02);
-  box-shadow:0 40px 80px rgba(0,0,0,1),0 0 60px rgba(214,173,99,.4)}
+ .floating-image img{transform:translateY(-10px) rotateX(2deg) rotateY(-2deg)}
+ .floating-image:hover img{transform:translateY(-20px) rotateX(3deg) rotateY(-3deg) scale(1.02);
+  box-shadow:0 0 60px 16px rgba(214,173,99,.45),0 0 140px 40px rgba(214,173,99,.2);
+  filter:drop-shadow(0 26px 26px rgba(0,0,0,.9))}
 }
 @media(max-width:640px){
  .floating-image{padding:15px;margin-bottom:30px}
- .floating-image::before{filter:blur(28px);opacity:.6}
- .floating-image img{transform:translateY(-10px) rotateX(1deg) rotateY(-1deg)}
+ .floating-image::before{filter:blur(20px);opacity:.9}
+ .floating-image img{transform:translateY(-10px) rotateX(1deg) rotateY(-1deg);
+  box-shadow:0 0 34px 12px rgba(214,173,99,.45),0 0 80px 24px rgba(214,173,99,.2);
+  filter:drop-shadow(0 14px 14px rgba(0,0,0,.85))}
 }
 </style>
 </head>
