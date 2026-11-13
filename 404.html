@@ -74,6 +74,25 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:22px 0;color:#85837c;f
  .nav-drop.open .nav-sub{display:block}
 }
 
+
+/* ===== Универсальный класс «парящее изображение» (.floating-image) ===== */
+.floating-image{position:relative;perspective:1000px;isolation:isolate;--glow-img:none;padding:20px}
+.floating-image::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:16px;
+ background-image:var(--glow-img);background-size:cover;background-position:center;filter:blur(40px);opacity:.6}
+.floating-image img{position:relative;z-index:1;display:block;width:100%;height:auto;
+ border:1px solid rgba(214,173,99,.5);border-radius:8px;
+ box-shadow:0 30px 60px rgba(0,0,0,.9),0 0 40px rgba(214,173,99,.2),0 20px 48px -10px rgba(214,173,99,.18);
+ transform:translateY(-10px) rotateX(1deg) rotateY(-1deg);
+ transition:transform .4s ease,box-shadow .4s ease}
+@media(min-width:901px){
+ .floating-image:hover img{transform:translateY(-20px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+  box-shadow:0 40px 80px rgba(0,0,0,1),0 0 60px rgba(214,173,99,.4)}
+}
+@media(max-width:640px){
+ .floating-image{padding:15px;margin-bottom:30px}
+ .floating-image::before{filter:blur(28px);opacity:.6}
+ .floating-image img{transform:translateY(-10px) rotateX(1deg) rotateY(-1deg)}
+}
 </style>
 </head>
 <body>
