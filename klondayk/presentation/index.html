@@ -196,6 +196,16 @@ body.tgm-lock{overflow:hidden}
   box-shadow:0 0 34px 12px rgba(214,173,99,.45),0 0 80px 24px rgba(214,173,99,.2);
   filter:drop-shadow(0 14px 14px rgba(0,0,0,.85))}
 }
+
+/* постер в презентации (геометрия как на /services/web-development/) */
+.poster{margin:0;padding:26px 0 34px;background:transparent}
+.poster .container{display:flex;justify-content:center}
+.poster .floating-image{width:100%;max-width:640px;--glow-img:url("/assets/presentation-lions.webp")}
+@media(max-width:640px){
+ .poster{padding:16px 0 24px}
+ .poster .container{width:100%;max-width:none;padding:0}
+ .poster .floating-image{width:100%;padding:15px;margin-bottom:12px}
+}
 </style>
 </head>
 <body>
@@ -214,6 +224,13 @@ body.tgm-lock{overflow:hidden}
   <p class="lead">Не сайт, а цифровой актив объекта: единая архитектура для привлечения посетителей, аренды, управления и аналитики. Ниже — контуры платформы, её инженерная основа и коммерческие условия: что входит в базовый пакет, а что подключается отдельно.</p>
   <div class="cover-meta"><span>Авторская разработка INDAGOR</span><span>Digital · AI · Growth</span><span>19 слайдов</span></div>
  </div></section>
+
+ <!-- постер -->
+ <figure class="poster"><div class="container">
+  <div class="floating-image">
+   <img src="/assets/presentation-lions.webp" alt="Цифровой актив торгового центра INDAGOR" width="836" height="941" loading="eager" decoding="async">
+  </div>
+ </div></figure>
 
  <!-- 02 -->
  <section class="slide" id="s2"><div class="container">
