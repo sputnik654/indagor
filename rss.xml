@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+ <channel>
+  <title>Блог INDAGOR</title>
+  <link>https://indagor.ru/blog/</link>
+  <description>Статьи INDAGOR о веб-разработке, AI-автоматизации, CRM и цифровых экосистемах коммерческой недвижимости.</description>
+  <language>ru-RU</language>
+  <lastBuildDate>Sat, 14 Nov 2026 12:44:45 +0300</lastBuildDate>
+  <atom:link href="https://indagor.ru/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+   <title>Что автоматизировать в первую очередь: 5 процессов, которые съедают время бизнеса</title>
+   <link>https://indagor.ru/blog/chto-avtomatizirovat-v-pervuyu-ochered/</link>
+   <guid isPermaLink="true">https://indagor.ru/blog/chto-avtomatizirovat-v-pervuyu-ochered/</guid>
+   <description>Пять рутинных процессов, которые чаще всего съедают время бизнеса, как их автоматизировать и по каким метрикам измерять эффект.</description>
+   <pubDate>Wed, 11 Nov 2026 10:00:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>Клондайк — цифровая платформа для управления коммерческой недвижимостью</title>
+   <link>https://indagor.ru/klondayk/</link>
+   <guid isPermaLink="true">https://indagor.ru/klondayk/</guid>
+   <description>Авторская разработка INDAGOR: объект, помещения, арендаторы, договоры, заявки и операционные процессы в едином контуре вместо таблиц и переписки.</description>
+   <pubDate>Wed, 11 Nov 2026 12:00:00 +0300</pubDate>
+  </item>
+ </channel>
+</rss>

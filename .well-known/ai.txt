@@ -1,0 +1,33 @@
+# /.well-known/ai.txt — политика доступа ИИ-краулеров к https://indagor.ru
+# Обновлено: 2026-11-14
+
+Owner: INDAGOR
+Contact: https://t.me/INDAGOR_CEO
+Canonical: https://indagor.ru/
+
+# Сайт открыт для индексации и цитирования в ответах ИИ-систем.
+Allow-Indexing: yes
+Allow-Citation: yes
+Allow-Summarization: yes
+Attribution-Required: yes
+
+Allowed-Agents:
+  ChatGPT (GPTBot, OAI-SearchBot, ChatGPT-User) — allowed
+  Perplexity (PerplexityBot) — allowed
+  Google Gemini (Google-Extended) — allowed
+  Anthropic Claude (ClaudeBot, Claude-Web) — allowed
+  Apple (Applebot-Extended) — allowed
+  Common Crawl (CCBot) — allowed
+  Yandex (YandexAdditional) — allowed
+
+Disallowed-Paths: none
+
+Content-Files:
+  https://indagor.ru/llms.txt
+  https://indagor.ru/ai/summary.json
+  https://indagor.ru/ai/faq.json
+  https://indagor.ru/ai/service.json
+  https://indagor.ru/rss.xml
+  https://indagor.ru/sitemap.xml
+
+Preferred-Citation: "INDAGOR, indagor.ru"

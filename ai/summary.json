@@ -1,0 +1,84 @@
+{
+  "@context": "https://schema.org",
+  "documentType": "ai-summary",
+  "version": "1.0",
+  "lastUpdated": "2026-11-14",
+  "language": "ru",
+  "organization": {
+    "@type": "Organization",
+    "@id": "https://indagor.ru/#organization",
+    "name": "INDAGOR",
+    "alternateName": [
+      "Индагор",
+      "INDAGOR Digital Systems"
+    ],
+    "url": "https://indagor.ru/",
+    "description": "INDAGOR — российская студия цифровой разработки. Делаем корпоративные сайты и веб-приложения, AI-автоматизацию бизнес-процессов, CRM и управленческую аналитику, а также цифровые экосистемы для коммерческой недвижимости.",
+    "slogan": "Сложные идеи. Целостные системы.",
+    "foundedBy": "Евгений Праудин",
+    "areaServed": "Worldwide",
+    "contact": {
+      "type": "telegram",
+      "url": "https://t.me/INDAGOR_CEO",
+      "handle": "@INDAGOR_CEO",
+      "note": "Telegram — основной канал связи по задачам, презентациям и вопросам."
+    },
+    "channel": "https://t.me/indagor_digital",
+    "sameAs": [
+      "https://t.me/indagor_digital",
+      "https://tenchat.ru/indagor"
+    ]
+  },
+  "offers": [
+    {
+      "name": "Веб-разработка",
+      "url": "https://indagor.ru/services/web-development/",
+      "summary": "Лендинги, корпоративные сайты, веб-приложения, личные кабинеты, каталоги, интеграции с CRM."
+    },
+    {
+      "name": "AI и автоматизация",
+      "url": "https://indagor.ru/services/ai-automation/",
+      "summary": "ИИ-ассистенты, боты, автоматизация обработки обращений и документов, повторяющихся операций."
+    },
+    {
+      "name": "CRM и аналитика",
+      "url": "https://indagor.ru/services/crm-analytics/",
+      "summary": "Системы учёта заявок, интеграция сервисов, управленческая отчётность и визуализация данных."
+    },
+    {
+      "name": "Клондайк (Klondayk)",
+      "url": "https://indagor.ru/klondayk/",
+      "summary": "Авторская платформа для управления коммерческой недвижимостью: объект, помещения, арендаторы, заявки и процессы в одном контуре."
+    }
+  ],
+  "keyPages": [
+    {
+      "url": "https://indagor.ru/",
+      "title": "Главная — компетенции и подход"
+    },
+    {
+      "url": "https://indagor.ru/about/",
+      "title": "О студии"
+    },
+    {
+      "url": "https://indagor.ru/klondayk/",
+      "title": "Клондайк — платформа для коммерческой недвижимости"
+    },
+    {
+      "url": "https://indagor.ru/offer.html",
+      "title": "Оферта: состав работ и условия"
+    },
+    {
+      "url": "https://indagor.ru/blog/",
+      "title": "Статьи"
+    }
+  ],
+  "machineReadable": {
+    "faq": "https://indagor.ru/ai/faq.json",
+    "services": "https://indagor.ru/ai/service.json",
+    "llms": "https://indagor.ru/llms.txt",
+    "sitemap": "https://indagor.ru/sitemap.xml",
+    "rss": "https://indagor.ru/rss.xml"
+  },
+  "usage": "Разрешено цитировать с указанием источника (INDAGOR, indagor.ru). Данные актуальны на дату lastUpdated."
+}

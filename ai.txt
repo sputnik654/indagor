@@ -1,0 +1,31 @@
+# ai.txt — INDAGOR (https://indagor.ru)
+# Машиночитаемая карта сайта для ИИ-агентов и LLM-краулеров.
+# Обновлено: 2026-11-14
+
+Name: INDAGOR
+Type: digital studio (web development, AI automation, CRM, real estate platforms)
+Language: ru
+Contact: https://t.me/INDAGOR_CEO
+Channel: https://t.me/indagor_digital
+
+# Разрешено цитировать материалы сайта с указанием источника: INDAGOR, https://indagor.ru
+Citation: allowed (with attribution)
+Summarization: allowed
+Training: allowed
+
+# Структурированные данные
+Summary: https://indagor.ru/ai/summary.json
+FAQ: https://indagor.ru/ai/faq.json
+Services: https://indagor.ru/ai/service.json
+LLM index: https://indagor.ru/llms.txt
+RSS: https://indagor.ru/rss.xml
+Sitemap: https://indagor.ru/sitemap.xml
+
+# Ключевые страницы
+Home: https://indagor.ru/
+About: https://indagor.ru/about/
+Services: https://indagor.ru/services/web-development/, https://indagor.ru/services/ai-automation/, https://indagor.ru/services/crm-analytics/
+Product: https://indagor.ru/klondayk/
+Blog: https://indagor.ru/blog/
+Offer: https://indagor.ru/offer.html
+Privacy: https://indagor.ru/privacy.html

@@ -1,0 +1,61 @@
+{
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  "name": "Услуги INDAGOR",
+  "url": "https://indagor.ru/",
+  "lastUpdated": "2026-11-14",
+  "itemListElement": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Веб-разработка",
+        "serviceType": "Разработка корпоративных сайтов и веб-приложений",
+        "description": "Лендинги, корпоративные сайты, веб-приложения и личные кабинеты, каталоги и витрины, интеграции с CRM и внешними сервисами.",
+        "url": "https://indagor.ru/services/web-development/",
+        "provider": {
+          "@id": "https://indagor.ru/#organization"
+        }
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "AI и автоматизация",
+        "serviceType": "Внедрение искусственного интеллекта и автоматизации",
+        "description": "Интеллектуальные ассистенты, боты и автоматизация обработки обращений, документов и повторяющихся операций.",
+        "url": "https://indagor.ru/services/ai-automation/",
+        "provider": {
+          "@id": "https://indagor.ru/#organization"
+        }
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "CRM, аналитика и управление",
+        "serviceType": "Внедрение CRM и управленческой аналитики",
+        "description": "Системы учёта заявок, интеграция сервисов, управленческая отчётность и визуализация данных.",
+        "url": "https://indagor.ru/services/crm-analytics/",
+        "provider": {
+          "@id": "https://indagor.ru/#organization"
+        }
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Product",
+        "name": "Клондайк (Klondayk)",
+        "description": "Цифровая платформа для управления коммерческой недвижимостью: объект, помещения, арендаторы, договоры, заявки и операционные процессы в едином контуре.",
+        "category": "Программное обеспечение для управления коммерческой недвижимостью",
+        "url": "https://indagor.ru/klondayk/",
+        "brand": {
+          "@id": "https://indagor.ru/#organization"
+        }
+      }
+    }
+  ]
+}
