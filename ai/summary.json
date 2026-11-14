@@ -1,4 +1,8 @@
 {
+  "name": "INDAGOR",
+  "description": "INDAGOR — студия цифровой разработки: корпоративные сайты и веб-приложения, AI-автоматизация бизнес-процессов, CRM и управленческая аналитика, платформа «Клондайк» для коммерческой недвижимости.",
+  "url": "https://indagor.ru/",
+  "lastModified": "2026-11-14",
   "@context": "https://schema.org",
   "documentType": "ai-summary",
   "version": "1.0",
