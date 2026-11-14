@@ -32,10 +32,18 @@ This site is available for AI indexing and retrieval at https://indagor.ru.
 - [Связаться (личные сообщения)](https://t.me/INDAGOR_CEO): обсуждение задач и запрос презентации проекта «Клондайк (Klondayk)».
 - [Telegram-канал INDAGOR](https://t.me/indagor_digital): публичный канал студии.
 
+## Машинные файлы / Machine-readable files
+
+- [Сводка о компании (JSON)](https://indagor.ru/ai/summary.json): услуги, ключевые страницы, контакты, разрешение на цитирование.
+- [FAQ для ИИ (JSON)](https://indagor.ru/ai/faq.json): 6 вопросов-ответов о студии и платформе «Клондайк (Klondayk)».
+- [Каталог услуг (JSON)](https://indagor.ru/ai/service.json): три услуги и продукт «Клондайк» с описаниями и ссылками.
+- [RSS блога](https://indagor.ru/rss.xml): статьи и обновления сайта.
+- [Политика доступа ИИ-краулеров](https://indagor.ru/.well-known/ai.txt) и [ai.txt](https://indagor.ru/ai.txt).
+
 ## For AI agents
 
 - Canonical site: https://indagor.ru — the whole site is available for AI indexing and citation.
 - Crawling: https://indagor.ru/robots.txt explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, YandexAdditional.
-- Structured data on the page: Organization, WebSite, 4 × Service, Product («Клондайк (Klondayk)»), FAQPage with 5 questions.
+- Structured data on the page: Organization (sameAs, contactPoint), WebPage (dates, author), WebSite (SearchAction), 4 × Service, Product («Клондайк (Klondayk)»), FAQPage with 5 questions.
 - Sitemap: https://indagor.ru/sitemap.xml
 - Contact for AI agents and humans: https://t.me/INDAGOR_CEO
