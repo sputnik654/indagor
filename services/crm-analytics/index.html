@@ -312,7 +312,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   <h1>Внедрение CRM и управленческая аналитика</h1>
   <p class="lead">Наводим порядок в данных: заявки, сделки, статусы и ответственные — в одном контуре. Не «ещё одна система», а понятная отчётность, по которой принимаются решения, а не гадательные выводы из таблиц.</p>
   <div class="actions">
-   <a class="btn" href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer">Обсудить задачу <span aria-hidden="true">↗</span></a>
+   <a class="btn" href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer" toolname="contact_telegram" tooldescription="Написать INDAGOR в Telegram, чтобы обсудить задачу">Обсудить задачу <span aria-hidden="true">↗</span></a>
    <a class="link" href="#tasks">Что делаем</a>
   </div>
  </div></section>
@@ -373,7 +373,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   <div class="eyebrow">Следующий шаг</div>
   <h2>Покажем, каких цифр вам не хватает</h2>
   <p>Расскажите, какие решения вы принимаете по заявкам и продажам, — предложим контур и состав отчётности.</p>
-  <a class="btn" href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer">Обсудить задачу <span aria-hidden="true">↗</span></a>
+  <a class="btn" href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer" toolname="contact_telegram" tooldescription="Написать INDAGOR в Telegram, чтобы обсудить задачу">Обсудить задачу <span aria-hidden="true">↗</span></a>
  </div></section>
 </main>
 
@@ -397,14 +397,14 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  </div>
 </aside>
 <!-- Модальное окно Telegram -->
-<div class="tgm-overlay" id="tgModal" role="dialog" aria-modal="true" aria-labelledby="tgModalTitle">
+<div class="tgm-overlay" id="tgModal" role="dialog" aria-modal="true" aria-labelledby="tgModalTitle" aria-describedby="tgModalHint">
  <div class="tgm-dialog">
   <button type="button" class="tgm-close" id="tgClose" aria-label="Закрыть окно">&times;</button>
   <h2 class="tgm-title" id="tgModalTitle">Связаться с нами</h2>
   <p class="tgm-sub">Telegram — основной канал связи: задачи, презентации, вопросы.</p>
-  <a class="tgm-btn tgm-btn-primary" id="tgOpen" href="tg://resolve?domain=INDAGOR_CEO">Открыть Telegram</a>
-  <button type="button" class="tgm-btn tgm-btn-copy" id="tgCopy">Скопировать ник @INDAGOR_CEO</button>
-  <p class="tgm-hint">Если Telegram не открылся, скопируйте ник и напишите нам в приложении.</p>
+  <a class="tgm-btn tgm-btn-primary" id="tgOpen" href="tg://resolve?domain=INDAGOR_CEO" toolname="open_telegram" tooldescription="Открыть чат с INDAGOR в приложении Telegram">Открыть Telegram</a>
+  <button type="button" class="tgm-btn tgm-btn-copy" id="tgCopy" aria-label="Скопировать ник @INDAGOR_CEO в буфер обмена" aria-live="polite" toolname="copy_telegram_handle" tooldescription="Скопировать ник @INDAGOR_CEO в буфер обмена, чтобы написать в Telegram вручную">Скопировать ник @INDAGOR_CEO</button>
+  <p class="tgm-hint" id="tgModalHint">Если Telegram не открылся, скопируйте ник и напишите нам в приложении.</p>
  </div>
 </div>
 <script>

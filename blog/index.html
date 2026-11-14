@@ -262,7 +262,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
    <a class="post" href="/blog/chto-avtomatizirovat-v-pervuyu-ochered/">
     <h2>Что автоматизировать в первую очередь: 5 процессов, которые съедают время бизнеса</h2>
     <p>Заявки, ответы клиентам, отчётность, документы и сбор внешних данных — что автоматизируется, что остаётся человеку и по каким метрикам измерять эффект.</p>
-    <div class="pmeta"><span>11 ноября 2026</span><span>6 минут чтения</span><span>Автоматизация</span></div>
+    <div class="pmeta"><span><time datetime="2026-11-11">11 ноября 2026</time></span><span>6 минут чтения</span><span>Автоматизация</span></div>
    </a>
   </div>
  </div></section>
@@ -271,7 +271,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   <div class="eyebrow">Следующий шаг</div>
   <h2>Хотите разобрать свой процесс?</h2>
   <p>Опишите, где сейчас теряется время, — предложим сценарий автоматизации и оценим объём работ.</p>
-  <a class="btn" href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer">Обсудить задачу <span aria-hidden="true">↗</span></a>
+  <a class="btn" href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer" toolname="contact_telegram" tooldescription="Написать INDAGOR в Telegram, чтобы обсудить задачу">Обсудить задачу <span aria-hidden="true">↗</span></a>
  </div></section>
 </main>
 
@@ -294,14 +294,14 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  </div>
 </aside>
 <!-- Модальное окно Telegram -->
-<div class="tgm-overlay" id="tgModal" role="dialog" aria-modal="true" aria-labelledby="tgModalTitle">
+<div class="tgm-overlay" id="tgModal" role="dialog" aria-modal="true" aria-labelledby="tgModalTitle" aria-describedby="tgModalHint">
  <div class="tgm-dialog">
   <button type="button" class="tgm-close" id="tgClose" aria-label="Закрыть окно">&times;</button>
   <h2 class="tgm-title" id="tgModalTitle">Связаться с нами</h2>
   <p class="tgm-sub">Telegram — основной канал связи: задачи, презентации, вопросы.</p>
-  <a class="tgm-btn tgm-btn-primary" id="tgOpen" href="tg://resolve?domain=INDAGOR_CEO">Открыть Telegram</a>
-  <button type="button" class="tgm-btn tgm-btn-copy" id="tgCopy">Скопировать ник @INDAGOR_CEO</button>
-  <p class="tgm-hint">Если Telegram не открылся, скопируйте ник и напишите нам в приложении.</p>
+  <a class="tgm-btn tgm-btn-primary" id="tgOpen" href="tg://resolve?domain=INDAGOR_CEO" toolname="open_telegram" tooldescription="Открыть чат с INDAGOR в приложении Telegram">Открыть Telegram</a>
+  <button type="button" class="tgm-btn tgm-btn-copy" id="tgCopy" aria-label="Скопировать ник @INDAGOR_CEO в буфер обмена" aria-live="polite" toolname="copy_telegram_handle" tooldescription="Скопировать ник @INDAGOR_CEO в буфер обмена, чтобы написать в Telegram вручную">Скопировать ник @INDAGOR_CEO</button>
+  <p class="tgm-hint" id="tgModalHint">Если Telegram не открылся, скопируйте ник и напишите нам в приложении.</p>
  </div>
 </div>
 <script>
