@@ -258,7 +258,7 @@ body.has-cookie{padding-bottom:118px}
   <p>Настоящая страница может обновляться. Актуальная редакция всегда доступна по адресу <a href="https://indagor.ru/offer.html">indagor.ru/offer.html</a>; дата вступления в силу указана в начале страницы. Информация, размещённая на Сайте ранее, утрачивает актуальность с момента публикации новой редакции.</p>
 
   <h2>11. Контакты</h2>
-  <p>Вопросы по составу работ, стоимости и условиям договора: Telegram — <a href="https://t.me/HitSputnik" target="_blank" rel="noopener noreferrer">t.me/HitSputnik</a>. Это официальный канал связи, указанный на Сайте.</p>
+  <p>Вопросы по составу работ, стоимости и условиям договора: Telegram — <a href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer">t.me/INDAGOR_CEO</a>. Это официальный канал связи, указанный на Сайте.</p>
   <p>Вопросы обработки персональных данных описаны в <a href="privacy.html">Политике конфиденциальности</a>.</p>
  </div>
 </main>
@@ -277,14 +277,14 @@ body.has-cookie{padding-bottom:118px}
   <button type="button" class="tgm-close" id="tgClose" aria-label="Закрыть окно">&times;</button>
   <h2 class="tgm-title" id="tgModalTitle">Связаться с нами</h2>
   <p class="tgm-sub">Telegram — основной канал связи: задачи, презентации, вопросы.</p>
-  <a class="tgm-btn tgm-btn-primary" id="tgOpen" href="tg://resolve?domain=HitSputnik">Открыть Telegram</a>
-  <button type="button" class="tgm-btn tgm-btn-copy" id="tgCopy">Скопировать ник @HitSputnik</button>
+  <a class="tgm-btn tgm-btn-primary" id="tgOpen" href="tg://resolve?domain=INDAGOR_CEO">Открыть Telegram</a>
+  <button type="button" class="tgm-btn tgm-btn-copy" id="tgCopy">Скопировать ник @INDAGOR_CEO</button>
   <p class="tgm-hint">Если Telegram не открылся, скопируйте ник и напишите нам в приложении.</p>
  </div>
 </div>
 <script>
 (function(){
- var SEL='a[href*="t.me/HitSputnik"]';
+ var SEL='a[href*="t.me/INDAGOR_CEO"]';
  var overlay=document.getElementById('tgModal');
  if(!overlay){return;}
  var closeBtn=document.getElementById('tgClose');
@@ -328,14 +328,14 @@ body.has-cookie{padding-bottom:118px}
    }
    function fallback(){
     var ta=document.createElement('textarea');
-    ta.value='@HitSputnik';ta.setAttribute('readonly','');
+    ta.value='@INDAGOR_CEO';ta.setAttribute('readonly','');
     ta.style.position='absolute';ta.style.left='-9999px';ta.style.top='0';
     document.body.appendChild(ta);ta.select();
     try{document.execCommand('copy');done();}catch(err){}
     document.body.removeChild(ta);
    }
    if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText('@HitSputnik').then(done).catch(fallback);
+    navigator.clipboard.writeText('@INDAGOR_CEO').then(done).catch(fallback);
    }else{fallback();}
   });
  }
