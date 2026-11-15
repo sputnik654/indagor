@@ -46,20 +46,22 @@
    functions `netlify/functions` (берутся из `netlify.toml`).
 2. **Site configuration → Environment variables** → `STATS_TOKEN` = длинная случайная строка
    (`openssl rand -hex 24`). Сохранить и нажать **Deploy site**.
-3. Запомнить адрес функции: `https://<имя>.netlify.app/track`.
-4. Прописать адрес в `<meta name="analytics-endpoint">` — сейчас там `PLACEHOLDER_NETLIFY_URL`,
-   и до замены счётчик молчит:
+3. Запомнить адрес функции: `https://bright-wisp-6c6965.netlify.app/.netlify/functions/track`.
+4. Адрес функции уже прописан в `<meta name="analytics-endpoint">` на всех 12 страницах:
+   `https://bright-wisp-6c6965.netlify.app/.netlify/functions/track`. Короткий вариант
+   `/track` (из `export const config = { path: "/track" }`) тоже работает. Если сайт переедет
+   на другой поддомен — заменить одной командой:
 
 ```bash
-grep -rl "PLACEHOLDER_NETLIFY_URL" --include=*.html . \
-  | xargs sed -i 's#PLACEHOLDER_NETLIFY_URL#https://<имя>.netlify.app/track#'
+grep -rl "bright-wisp-6c6965.netlify.app" --include=*.html . \
+  | xargs sed -i 's#https://bright-wisp-6c6965.netlify.app/.netlify/functions/track#https://<новый>.netlify.app/track#'
 ```
 
 5. Проверить приём (бот-фильтр реагирует на User-Agent — curl отбрасывается, это норма,
    поэтому проверяем «человеческим» UA):
 
 ```bash
-curl -sS -X POST https://<имя>.netlify.app/track \
+curl -sS -X POST https://bright-wisp-6c6965.netlify.app/.netlify/functions/track \
   -H 'Content-Type: text/plain' \
   -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/131.0' \
   -d '{"path":"/test/","ref":"https://ya.ru","ua_type":"desktop","lang":"ru-RU","viewport":1280,"session_id":"test12345678abcd","ts":'"$(date +%s000)"'}'
@@ -69,14 +71,14 @@ curl -sS -X POST https://<имя>.netlify.app/track \
 6. Проверить чтение:
 
 ```bash
-curl -sS "https://<имя>.netlify.app/stats?from=$(date -d '-6 days' +%F)&to=$(date +%F)" \
+curl -sS "https://bright-wisp-6c6965.netlify.app/.netlify/functions/stats?from=$(date -d '-6 days' +%F)&to=$(date +%F)" \
   -H "x-auth-token: $STATS_TOKEN"
 ```
 
 ## Отчёт
 
 ```bash
-export NETLIFY_STATS_URL="https://<имя>.netlify.app/stats"
+export NETLIFY_STATS_URL="https://bright-wisp-6c6965.netlify.app/.netlify/functions/stats"
 export STATS_TOKEN="<токен>"
 
 python3 scripts/fetch_stats.py              # последние 7 дней, Markdown

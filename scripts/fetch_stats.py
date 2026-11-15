@@ -2,7 +2,7 @@
 """Отчёт по собственной аналитике indagor.ru (Netlify Function GET /stats).
 
 Переменные окружения:
-    NETLIFY_STATS_URL   например https://<имя>.netlify.app/stats
+    NETLIFY_STATS_URL   https://bright-wisp-6c6965.netlify.app/.netlify/functions/stats
     STATS_TOKEN         тот же токен, что задан в Netlify Environment variables
 
 Примеры:
@@ -149,7 +149,7 @@ def main() -> int:
     url = (args.url or "").strip()
     token = (os.environ.get("STATS_TOKEN") or "").strip()
     if not url:
-        fail("Не задан NETLIFY_STATS_URL (пример: https://indagor-analytics.netlify.app/stats)")
+        fail("Не задан NETLIFY_STATS_URL (пример: https://bright-wisp-6c6965.netlify.app/.netlify/functions/stats)")
     if not token:
         fail("Не задан STATS_TOKEN в окружении")
     if args.days < 1:
