@@ -78,8 +78,8 @@ curl -sS "https://bright-wisp-6c6965.netlify.app/.netlify/functions/stats?from=$
 ## Отчёт
 
 ```bash
-export NETLIFY_STATS_URL="https://bright-wisp-6c6965.netlify.app/.netlify/functions/stats"
-export STATS_TOKEN="<токен>"
+# переменные берутся из окружения; локально они лежат в файле с правами 600
+set -a; . ~/.hermes/.env; set +a
 
 python3 scripts/fetch_stats.py              # последние 7 дней, Markdown
 python3 scripts/fetch_stats.py --days 30
