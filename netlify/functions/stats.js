@@ -120,7 +120,11 @@ export default async (req) => {
   const byHour = new Array(24).fill(0);
   const byUtm = {};
   const sessions = new Set();
+  const durations = [];
   let total = 0;
+  let anonymous = 0;
+  let consented = 0;
+  let consents = 0;
   let daysWithData = 0;
   let errors = 0;
 
@@ -147,10 +151,25 @@ export default async (req) => {
       if (!Array.isArray(events)) return;
       if (!events.length) return;
       daysWithData++;
-      byDay[day] = events.length;
-      total += events.length;
+
+      let views = 0;
       for (const e of events) {
         if (!e || typeof e !== "object") continue;
+
+        /* Назад совместимость: события до разделения (без ty/c) считаем
+           просмотром с согласием — у них всегда был session_id. */
+        const type = typeof e.ty === "string" ? e.ty : "pv";
+        const isConsent = e.c === 1 || (e.c === undefined && typeof e.sid === "string");
+
+        if (type === "cg") { consents++; continue; }
+        if (type === "dr") {
+          const d = Number(e.dur);
+          if (Number.isFinite(d) && d >= 0) durations.push(d);
+          continue;
+        }
+
+        views++;
+        if (isConsent) consented++; else anonymous++;
         bump(byPage, typeof e.p === "string" && e.p ? e.p : "/");
         bump(byRef, typeof e.r === "string" && e.r ? e.r : "");
         bump(byDevice, e.d === "mobile" || e.d === "tablet" || e.d === "desktop" ? e.d : "unknown");
@@ -164,14 +183,20 @@ export default async (req) => {
           byHour[hour] += 1;
         }
         if (typeof e.u_src === "string" && e.u_src) bump(byUtm, e.u_src);
-        if (typeof e.sid === "string" && e.sid) sessions.add(e.sid);
+        if (isConsent && typeof e.sid === "string" && e.sid) sessions.add(e.sid);
       }
+      total += views;
+      byDay[day] = views;
     });
   }
 
   /* Дни без данных показываем нулями: временной ряд должен быть непрерывным. */
   const byDaySeries = {};
   for (const day of days) byDaySeries[day] = byDay[day] || 0;
+
+  const avgDuration = durations.length
+    ? Math.round((durations.reduce((a, b) => a + b, 0) / durations.length) * 10) / 10
+    : 0;
 
   return reply(200, {
     from,
@@ -181,7 +206,13 @@ export default async (req) => {
     read_errors: errors,
     generated_at: new Date().toISOString(),
     total,
+    total_anonymous: anonymous,
+    total_consented: consented,
+    anonymous_share: total ? Math.round((anonymous / total) * 1000) / 10 : 0,
+    consents,
     sessions: sessions.size,
+    avg_duration_sec: avgDuration,
+    duration_samples: durations.length,
     by_page: ranked(byPage),
     by_ref: ranked(byRef),
     by_day: byDaySeries,

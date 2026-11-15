@@ -117,6 +117,10 @@ function cleanInt(v, min, max) {
   return Math.min(max, Math.max(min, n));
 }
 
+/* Типы событий: pv — просмотр страницы, cg — «Принять» в баннере,
+   dr — время на странице (duration). */
+const TYPES = { pageview: "pv", consent_granted: "cg", duration: "dr" };
+
 /* Собрать компактное событие: короткие ключи экономят размер блоба,
    пустые строки не пишем вовсе. */
 function buildEvent(body, now) {
@@ -126,17 +130,25 @@ function buildEvent(body, now) {
       ? Math.round(tsRaw)
       : now;
 
+  const type = TYPES[body.type] || "pv";
+  const consent = body.consent === true;
+
   const ev = {
     t: ts,
+    ty: type,
+    c: consent ? 1 : 0,
     p: cleanPath(body.path),
     d: cleanDevice(body.ua_type),
     l: cleanLang(body.lang),
     w: cleanInt(body.viewport, 0, 20000)
   };
+  if (type === "dr") ev.dur = cleanInt(body.duration, 0, 7200);
 
   const ref = hostOnly(body.ref);
   if (ref) ev.r = ref;
-  const sid = cleanSid(body.session_id);
+  /* session_id пишем только при согласии: анонимное событие не должно
+     связывать просмотры между собой. */
+  const sid = consent ? cleanSid(body.session_id) : "";
   if (sid) ev.sid = sid;
   const src = str(body.utm_source, 60).toLowerCase().replace(/[^\p{L}\p{N}._-]/gu, "");
   if (src) ev.u_src = src;

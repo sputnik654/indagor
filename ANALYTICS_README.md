@@ -17,27 +17,38 @@
 | `package.json` | `type: module` + `@netlify/blobs` (точная версия) |
 | `netlify/functions/track.js` | `POST /track`: фильтр ботов (60+ шаблонов) и DNT, анонимные поля, запись в Blobs |
 | `netlify/functions/stats.js` | `GET /stats`: агрегаты по токену `x-auth-token` |
-| `assets/analytics-tracker.js` | клиентский скрипт на 12 страницах (≈3 КБ, без библиотек) |
+| `assets/analytics-tracker.js` | клиентский скрипт на 12 страницах (3,9 КБ, без библиотек) |
 | `scripts/fetch_stats.py` | отчёт в Markdown: топ-страницы, источники, динамика, устройства |
 | `netlify-public/.gitkeep` | заглушка publish-каталога, чтобы Netlify не падал |
 
 ## Что собирается
 
-Одно событие на просмотр страницы. Хранилище: Netlify Blobs, store `analytics`,
-ключ `events/YYYY-MM-DD.json` (день по Москве), массив событий, лимит 10 000 в сутки.
+Хранилище: Netlify Blobs, store `analytics`, ключ `events/YYYY-MM-DD.json` (день по Москве),
+массив событий, лимит 10 000 в сутки. Три типа событий (`ty`):
+
+| `ty` | Что это | Когда отправляется |
+|---|---|---|
+| `pv` | просмотр страницы | всегда, независимо от согласия |
+| `cg` | «Принять» в cookie-баннере | по клику; несёт `session_id` |
+| `dr` | время на странице (`dur`, сек) | `pagehide` / уход со вкладки |
 
 ```json
-{"t":1763200000000,"p":"/klondayk/","r":"google.com","d":"mobile","l":"ru-ru","w":390,"sid":"a1b2c3d4e5f60718","u_src":"yandex"}
+{"t":1763200000000,"ty":"pv","c":0,"p":"/klondayk/","r":"google.com","d":"mobile","l":"ru-ru","w":390}
+{"t":1763200005000,"ty":"cg","c":1,"p":"/klondayk/","d":"desktop","l":"ru-ru","w":1280,"sid":"a1b2c3d4e5f60718"}
 ```
 
 - `t` — время (мс), `p` — путь, `r` — домен источника (пусто = прямой заход),
   `d` — mobile/tablet/desktop, `l` — язык, `w` — ширина окна,
-  `sid` — 16-символьный идентификатор вкладки, `u_src`/`u_med`/`u_cmp` — UTM.
+  `c` — согласие (1/0), `sid` — 16-символьный идентификатор вкладки (только при `c:1`),
+  `dur` — секунды на странице, `u_src`/`u_med`/`u_cmp` — UTM.
+- **Без согласия** уходит только `pv` без `session_id`, без cookie и IP: просмотры нельзя
+  связать между собой, считаются лишь суммы по страницам/источникам/устройствам.
+- **С согласием** добавляются `cg` и `dr` с `sid`, а `analytics.js` грузит Метрику и GTM/GA4.
+- Сервер принудительно отбрасывает `session_id` у событий с `consent: false` — даже если
+  клиент его пришлёт.
 - Не сохраняются: IP-адрес, полный User-Agent, cookie, содержимое страниц.
 - Запись идёт с оптимистичной блокировкой по ETag (`onlyIfMatch`), параллельные запросы
   не теряют события.
-- Событие уходит только после клика «Принять» в cookie-баннере (152-ФЗ):
-  до согласия счётчик не делает ни одного запроса.
 
 ## Развёртывание (один раз)
 
@@ -87,6 +98,12 @@ python3 scripts/fetch_stats.py --days 30
 python3 scripts/fetch_stats.py --from 2026-11-01 --to 2026-11-15
 python3 scripts/fetch_stats.py --json       # сырой JSON
 ```
+
+В ответе `/stats`: `total` (все просмотры), `total_anonymous` / `total_consented`
+(разделение по согласию), `anonymous_share` (%), `consents` (сколько раз нажали «Принять»),
+`sessions` (уникальные вкладки — только с согласием), `avg_duration_sec` + `duration_samples`
+(среднее время на странице), `by_page`, `by_ref`, `by_day`, `by_device`, `by_lang`,
+`by_hour`, `by_utm_source`.
 
 ## Ограничения и оговорки
 
