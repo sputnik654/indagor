@@ -1,0 +1,20 @@
+# ==========================================================================
+# INDAGOR — конфигурация Netlify
+# Сайт живёт на GitHub Pages (indagor.ru). Netlify хостит ТОЛЬКО функции:
+#   /track  — приём анонимных событий  (netlify/functions/track.js)
+#   /stats  — чтение агрегатов по токену (netlify/functions/stats.js)
+# publish-каталог пустой: Netlify не должен дублировать сайт.
+# ==========================================================================
+
+[build]
+  publish = "netlify-public"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Пути /track и /stats заданы в самих функциях через `export const config = { path }`,
+# поэтому редиректы не нужны (редирект на тот же путь дал бы петлю).

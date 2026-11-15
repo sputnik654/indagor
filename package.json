@@ -1,0 +1,13 @@
+{
+  "name": "indagor-analytics",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Анонимная статистика посещений indagor.ru: Netlify Functions + Netlify Blobs (сайт остаётся на GitHub Pages)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.9"
+  }
+}

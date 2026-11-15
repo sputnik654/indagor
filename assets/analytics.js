@@ -20,6 +20,14 @@
     try { localStorage.setItem(KEY, '1'); } catch (e) {}
   }
 
+  /* Согласие дано: сообщаем всем слушателям (собственный счётчик
+     /assets/analytics-tracker.js отправляет отложенный просмотр). */
+  function broadcastConsent() {
+    try {
+      document.dispatchEvent(new CustomEvent('indagor:consent'));
+    } catch (e) {}
+  }
+
   function startGTM() {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
@@ -69,6 +77,7 @@
         saveConsent();
         hideBanner(bar);
         loadAnalytics();
+        broadcastConsent();
       });
     }
   }
