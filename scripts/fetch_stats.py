@@ -107,11 +107,17 @@ def hours_block(hours: list) -> list[str]:
 
 def render(payload: dict) -> str:
     total = int(payload.get("total") or 0)
+    anon = payload.get("total_anonymous", 0)
+    consent = payload.get("total_consented", 0)
+    share = payload.get("anonymous_share", 0)
+    avg_dur = payload.get("avg_duration_sec", 0)
     lines = [
         "# Статистика indagor.ru",
         "",
         f"**Период:** {payload.get('from')} … {payload.get('to')}  ",
-        f"**Событий:** {total}  **Сессий (вкладок):** {payload.get('sessions', 0)}  "
+        f"**Просмотров:** {total} — анонимно **{anon}** ({share}%), с согласием **{consent}**  ",
+        f"**Сессий (вкладок):** {payload.get('sessions', 0)} · **«Принять» нажали:** {payload.get('consents', 0)}  ",
+        f"**Среднее время на странице:** {avg_dur} с ({payload.get('duration_samples', 0)} замеров)  ",
         f"**Дней с данными:** {payload.get('days_with_data')} из {payload.get('days')}",
     ]
     if payload.get("read_errors"):
