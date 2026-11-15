@@ -1,13 +1,13 @@
-/* INDAGOR — счётчик: анонимный просмотр → POST /track. Без cookie, без IP,
-   без полного UA. Только после согласия (флаг indagor_cookie_consent='1'
-   или событие 'indagor:consent'). Endpoint — meta analytics-endpoint. */
+/* INDAGOR — счётчик: просмотр → POST /track. Без cookie, без IP, без UA.
+   Только после согласия (indagor_cookie_consent='1' или событие 'indagor:consent'). */
 (function () {
-  var m = document.querySelector('meta[name="analytics-endpoint"]'), url = m && m.getAttribute('content'), s;
+  var m = document.querySelector('meta[name="analytics-endpoint"]'), url = m && m.getAttribute('content');
   if (!url || !/^https?:\/\//i.test(url = url.trim())) return;
+  url = url.replace(/\/\.netlify\/functions\//, '/');   /* старый путь = 404 */
   var n = navigator, KEY = 'indagor_sid', sent = 0;
   function ok() { try { return localStorage.getItem('indagor_cookie_consent') === '1'; } catch (e) { return 0; } }
   function dnt() { var d = n.doNotTrack || window.doNotTrack; return d === '1' || d === 'yes' || n.globalPrivacyControl; }
-  var sid = function () {   /* 16 символов, sessionStorage, не cookie */
+  var sid = function () {   /* 16 симв, sessionStorage */
     var v = '', i, a = new Uint8Array(8);
     try { v = sessionStorage.getItem(KEY) || ''; } catch (e) {}
     if (/^[a-z0-9]{16}$/i.test(v)) return v;
@@ -41,7 +41,7 @@
       var v = q.get('utm_' + k); if (v) p['utm_' + k] = v.slice(0, 60);
     });
     var b = JSON.stringify(p);
-    try {   /* text/plain — без preflight: sendBeacon его не умеет */
+    try {   /* text/plain: sendBeacon не умеет preflight */
       if (n.sendBeacon && n.sendBeacon(url, new Blob([b], { type: 'text/plain;charset=UTF-8' }))) return;
       fetch(url, { method: 'POST', mode: 'cors', credentials: 'omit', keepalive: true,
         headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: b }).catch(function () {});
