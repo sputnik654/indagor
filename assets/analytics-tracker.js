@@ -1,11 +1,18 @@
 /* INDAGOR — счётчик. Всегда: анонимный pageview (без cookie, IP, session_id).
    После согласия: событие consent_granted + session_id и сторонние счётчики
-   (analytics.js: Метрика/GTM). Время на странице — pagehide/visibilitychange. */
+   (analytics.js: Метрика/GTM).
+   Время на странице — только АКТИВНОЕ: таймер идёт при
+   document.visibilityState === 'visible' и встаёт на паузу, когда вкладка
+   скрыта (ушли в другую вкладку/свернули окно). Каждый активный отрезок
+   отправляется отдельным событием duration, поэтому в отчёте avg_duration_sec —
+   средняя длительность активного отрезка, а их сумма — чистое время на странице
+   без фонового «висения». */
 (function () {
   var m = document.querySelector('meta[name="analytics-endpoint"]'), url = m && m.getAttribute('content');
   if (!url || !/^https?:\/\//i.test(url = url.trim())) return;
   url = url.replace(/\/\.netlify\/functions\//, '/');   /* старый путь = 404 */
-  var n = navigator, KEY = 'indagor_sid', T0 = Date.now(), sent = 0, durSent = 0;
+  var n = navigator, KEY = 'indagor_sid', sent = 0, segs = 0;
+  var t0 = Date.now(), act = 0, vis = document.visibilityState !== 'hidden';
 
   function ok() { try { return localStorage.getItem('indagor_cookie_consent') === '1'; } catch (e) { return 0; } }
   function dnt() { var d = n.doNotTrack || window.doNotTrack; return d === '1' || d === 'yes' || n.globalPrivacyControl; }
@@ -54,14 +61,19 @@
   }
   function pageview() { if (sent || dnt()) return; sent = 1; ev('pageview'); }
   function duration() {
-    var s = Math.round((Date.now() - T0) / 1000);
-    if (durSent || dnt() || s < 2 || s > 7200) return;
-    durSent = 1; ev('duration', { duration: s });
+    if (vis) { act += Date.now() - t0; t0 = Date.now(); }   /* накопить видимый отрезок */
+    var s = Math.round(act / 1000);
+    if (segs >= 20 || dnt() || s < 2) return;   /* <2 с — шум, >20 отрезков — защита от спама */
+    act = 0; segs++;
+    ev('duration', { duration: s });
   }
   window.indagorTrack = pageview;
 
   pageview();   /* анонимно, до любого согласия; DNT уважается */
   if (!ok()) document.addEventListener('indagor:consent', function () { ev('consent_granted'); }, { once: true });
-  addEventListener('pagehide', duration);
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') duration(); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') { duration(); vis = false; }   /* пауза: отрезок закрыт */
+    else if (!vis) { vis = true; t0 = Date.now(); }                            /* снова активны — новый отрезок */
+  });
+  addEventListener('pagehide', duration);   /* финальный отрезок при уходе со страницы */
 })();
