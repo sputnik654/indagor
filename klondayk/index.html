@@ -187,7 +187,7 @@ body.tgm-lock{overflow:hidden}
 
 /* баннер-визуал под H1 */
 .banner{margin:0;padding:32px 0 0}
-.banner img{width:100%;height:auto;display:block;border:1px solid rgba(214,173,99,.28);box-shadow:0 28px 70px rgba(0,0,0,.5)}
+.banner img{width:100%;height:auto;display:block}
 @media(max-width:640px){.banner{padding:22px 0 0}}
 
 /* ===== Читаемость и визуальные акценты ===== */
@@ -248,6 +248,19 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   filter:drop-shadow(0 14px 14px rgba(0,0,0,.85))}
 }
 
+/* Баннер /klondayk/: рамка/свечение/hover 1:1 с эталоном .floating-image.
+   Отличия только структурные: padding эталона обнулён (иначе картинка 1040 вместо 1080),
+   свечение вынесено через inset ::before, в покое без наклона (габарит 1080x608 как был). */
+.banner-float{--glow-img:url("/assets/banner-klondayk-v2.webp");padding:0;margin:0;width:100%;max-width:none}
+.banner-float::before{inset:-20px}
+.banner-float img{transform:none}
+@media(min-width:901px){.banner-float:hover img{transform:none}}
+@media (hover:hover) and (pointer:fine) and (min-width:901px){.banner-float:hover img{transform:translateY(-20px) rotateX(3deg) rotateY(-3deg) scale(1.02);
+ box-shadow:0 0 60px 16px rgba(214,173,99,.45),0 0 140px 40px rgba(214,173,99,.2);
+ filter:drop-shadow(0 26px 26px rgba(0,0,0,.9))}}
+@media(max-width:640px){.banner-float{padding:0;margin:0}.banner-float::before{inset:-15px}.banner-float img{transform:none}}
+@media (prefers-reduced-motion:reduce){.banner-float img{transform:none;transition:none}.banner-float:hover img{transform:none}}
+
 /* cookie-баннер */
 body.has-cookie{padding-bottom:118px}
 .cookie{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(8,9,9,.97);border-top:1px solid rgba(214,173,99,.4);backdrop-filter:blur(14px)}
@@ -291,7 +304,9 @@ body.has-cookie{padding-bottom:118px}
   </div>
  </div></section>
 <figure class="banner"><div class="container">
-  <img src="/assets/banner-klondayk-v2.webp" alt="Визуализация платформы «Клондайк» — цифровой платформы для управления коммерческой недвижимостью" width="1200" height="675" loading="lazy" decoding="async">
+  <div class="floating-image banner-float">
+   <img src="/assets/banner-klondayk-v2.webp" alt="Визуализация платформы «Клондайк» — цифровой платформы для управления коммерческой недвижимостью" width="1200" height="675" loading="lazy" decoding="async">
+  </div>
 </div></figure>
 
 
