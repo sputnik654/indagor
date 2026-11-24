@@ -44,9 +44,18 @@
    "datePublished": "2026-11-24",
    "dateModified": "2026-11-24",
    "author": {
-    "@type": "Organization",
-    "name": "INDAGOR",
-    "url": "https://indagor.ru/"
+    "@type": "Person",
+    "@id": "https://indagor.ru/#evgenii",
+    "name": "Евгений",
+    "jobTitle": "Основатель INDAGOR",
+    "description": "Основатель INDAGOR (Intelligent Digital Systems): проектирование цифровых систем, которые связывают маркетинг, продажи и управление.",
+    "url": "https://indagor.ru/about/",
+    "sameAs": [
+     "https://www.linkedin.com/in/evgenii-indagor/"
+    ],
+    "worksFor": {
+     "@id": "https://indagor.ru/#organization"
+    }
    },
    "publisher": {
     "@type": "Organization",
@@ -62,7 +71,9 @@
    "mainEntityOfPage": {
     "@id": "https://indagor.ru/blog/edinnaya-platforma-vmesto-servisov/#webpage"
    },
-   "image": ["https://indagor.ru/assets/blog-platform-hero.webp"],
+   "image": [
+    "https://indagor.ru/assets/blog-platform-hero.webp"
+   ],
    "inLanguage": "ru-RU",
    "articleSection": "Платформа",
    "wordCount": 2387,
@@ -85,7 +96,7 @@
    "datePublished": "2026-11-24",
    "dateModified": "2026-11-24",
    "author": {
-    "@id": "https://indagor.ru/#organization"
+    "@id": "https://indagor.ru/#evgenii"
    }
   },
   {
@@ -340,7 +351,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 /* постер в статье: та же структура, что на страницах услуг */
 .poster{margin:0 0 34px;background:transparent}
 .poster .container{display:flex;justify-content:center;width:100%;max-width:none;padding:0}
-.poster .floating-image{width:100%;max-width:640px;--glow-img:url("/assets/blog-automation-hero.webp")}
+.poster .floating-image{width:100%;max-width:640px;--glow-img:url("/assets/blog-platform-hero.webp")}
 @media(max-width:640px){
  /* полный выход из текстовой колонки: те же 361px и поля 15px, что на страницах услуг */
  .poster{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-bottom:26px;padding:0}
@@ -363,6 +374,28 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 .footer-mail:hover{color:var(--gold2)}
 .footer-mail-ico{flex:0 0 auto;opacity:.9}
 .tgm-btn-copy.is-copied{background:rgba(214,173,99,.14);border-color:var(--gold);color:var(--gold2)}
+/* --- E-E-A-T: подпись автора, «Об авторе», конверсионный блок --- */
+.byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:-14px 0 30px;padding:0 0 22px;border-bottom:1px solid rgba(255,255,255,.08);font-size:13.5px;letter-spacing:0;text-transform:none;color:#c9c6bd;line-height:1.55}
+.byline b{color:#f4efe4;font-weight:600}
+.byline a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(214,173,99,.45)}
+.byline a:hover{border-bottom-color:var(--gold2)}
+.byline-sep{color:rgba(255,255,255,.3)}
+.author-bio{margin:36px 0 0;padding:26px 28px;border:1px solid rgba(214,173,99,.26);border-left:2px solid var(--gold);background:linear-gradient(145deg,rgba(214,173,99,.07),rgba(255,255,255,.012))}
+.author-bio .bio-eyebrow{color:var(--gold);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;margin:0 0 12px}
+.author-bio p{margin:0 0 12px;color:#d3d0c7;font-size:15px;line-height:1.75}
+.author-bio .bio-links{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:13px;margin:14px 0 0}
+.author-bio .bio-links a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(214,173,99,.45)}
+.cta-block{margin:38px 0 6px;padding:32px 30px;border:1px solid rgba(214,173,99,.4);background:radial-gradient(120% 140% at 0% 0%,rgba(214,173,99,.15),rgba(255,255,255,.015) 60%)}
+.cta-block .cta-eyebrow{color:var(--gold);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;margin:0 0 12px;text-transform:uppercase}
+.cta-block p.cta-lead{margin:0 0 20px;color:#e8e4da;font-size:16px;line-height:1.7;max-width:620px}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px}
+.cta-actions a{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:14px 26px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:transform .2s,filter .2s,background .2s}
+.cta-actions .cta-primary{background:linear-gradient(135deg,#f2d99d,#c89b4c);color:#17130b;border:1px solid #f2d99d}
+.cta-actions .cta-primary:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.cta-actions .cta-secondary{border:1px solid rgba(214,173,99,.75);color:var(--gold2);background:rgba(214,173,99,.06)}
+.cta-actions .cta-secondary:hover{transform:translateY(-2px);background:rgba(214,173,99,.15)}
+.cta-note{margin:16px 0 0;font-size:12.5px;color:#8f8c84;line-height:1.6}
+@media(max-width:640px){.byline{font-size:12.5px;gap:7px 10px}.author-bio,.cta-block{padding:20px 18px}.cta-actions a{width:100%}}
 </style>
 <meta name="analytics-endpoint" content="https://bright-wisp-6c6965.netlify.app/track">
 <script defer src="/assets/analytics.js"></script>
@@ -381,11 +414,11 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   <nav class="crumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span>/</span><a href="/blog/">Статьи</a><span>/</span><span>Платформа</span></nav>
   <div class="eyebrow eyebrow-top">Архитектура бизнеса</div>
   <h1 class="article-title">Десятки сервисов не спасают бизнес. Его спасает одна система</h1>
-  <div class="meta"><span>Опубликовано: <time datetime="2026-11-24">24 ноября 2026</time></span><span>12 минут чтения</span><span>INDAGOR</span></div>
+  <div class="byline"><span>Автор: <a href="https://www.linkedin.com/in/evgenii-indagor/" target="_blank" rel="noopener noreferrer author">Евгений</a>, <b>основатель INDAGOR</b></span><span class="byline-sep" aria-hidden="true">·</span><span><time datetime="2026-11-24">24 ноября 2026</time></span><span class="byline-sep" aria-hidden="true">·</span><span>12 минут чтения</span></div>
 
   <figure class="poster"><div class="container">
    <div class="floating-image">
-    <img src="/assets/blog-platform-hero.webp" srcset="/assets/blog-platform-hero-480.webp 480w, /assets/blog-platform-hero-720.webp 720w, /assets/blog-platform-hero.webp 831w" sizes="(max-width: 700px) calc(100vw - 30px), 640px" alt="Единая цифровая платформа INDAGOR: глобус, орбитальные связи и город — один контур вместо набора разрозненных сервисов" width="831" height="941" loading="lazy" decoding="async">
+    <img src="/assets/blog-platform-hero.webp" srcset="/assets/blog-platform-hero-480.webp 480w, /assets/blog-platform-hero-720.webp 720w, /assets/blog-platform-hero.webp 831w" sizes="(max-width: 700px) calc(100vw - 30px), 640px" alt="Единая цифровая платформа INDAGOR — архитектура бизнеса" width="831" height="941" loading="lazy" decoding="async">
    </div>
   </div></figure>
 
@@ -457,7 +490,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   <p><strong>Как это выглядит сейчас.</strong> Меню на сайте, брони по телефону, заказы в одном сервисе, склад в тетради, программа лояльности «где-то есть». Постоянный гость приходит третий раз, и его встречают как нового.</p>
   <p><strong>Что меняется в едином контуре.</strong> Меню, брони, заказы и склад работают вместе: блюдо закончилось — это видно и в зале, и в меню. История гостя собирается автоматически, акции бьют по реальным сегментам, а не по всем подряд. Повторный визит перестаёт быть случайностью.</p>
 
-  <p>Четыре разных бизнеса, четыре разных набора процессов — и одна логика: <strong>клиент, работа и деньги должны быть связаны</strong>. Именно на этом принципе строятся продукты INDAGOR.</p>
+  <p>Четыре разных бизнеса, четыре разных набора процессов — и одна логика: <strong>клиент, работа и деньги должны быть связаны</strong>. Именно на этом принципе строятся продукты INDAGOR: <a href="/services/crm-analytics/">CRM и аналитика</a>, <a href="/services/ai-automation/">автоматизация и ИИ</a> и <a href="/klondayk/">Клондайк</a> — платформа для управления коммерческой недвижимостью, где в одном контуре живут объекты, арендаторы, заявки и сервисные процессы.</p>
 
   <h2>Масштабирование: точка, сеть, франшиза</h2>
 
@@ -487,7 +520,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 
   <h2>Сколько это стоит и с чего начать</h2>
 
-  <p>Стоимость цифровой платформы зависит не от количества страниц, а от состава модулей, сложности интеграций, правил доступа и объёма данных. Поэтому универсальной цифры нет: одному бизнесу достаточно сайта с автоматической обработкой заявок, другому нужны CRM, роли, интеграции, аналитика и ИИ-слой. Стартовая стоимость базового пакета внедрения платформы INDAGOR — от 150 000 ₽, итоговая смета фиксируется в договоре до начала работ; информация о цене носит ознакомительный характер и не является публичной офертой (состав и условия — в <a href="/offer.html">оферте</a>). Начинать разумно с одного процесса, который отнимает больше всего времени или создаёт ошибки: первый этап должен дать результат, который видно в цифрах, а не через полгода «внедрения».</p>
+  <p>Стоимость цифровой платформы зависит не от количества страниц, а от состава модулей, сложности интеграций, правил доступа и объёма данных. Поэтому универсальной цифры нет: одному бизнесу достаточно <a href="/services/web-development/">сайта с автоматической обработкой заявок</a>, другому нужны CRM, роли, интеграции, аналитика и ИИ-слой. Стартовая стоимость базового пакета внедрения платформы INDAGOR — от 150 000 ₽, итоговая смета фиксируется в договоре до начала работ; информация о цене носит ознакомительный характер и не является публичной офертой (состав и условия — в <a href="/offer.html">оферте</a>). Начинать разумно с одного процесса, который отнимает больше всего времени или создаёт ошибки: первый этап должен дать результат, который видно в цифрах, а не через полгода «внедрения».</p>
 
   <div class="table-wrap">
    <table>
@@ -517,7 +550,26 @@ p,li{font-size:var(--fs-body);line-height:1.75}
    <li><strong>Сможете открыть ещё три точки</strong>, не создавая новый набор программ и таблиц?</li>
   </ol>
 
-  <div class="callout"><b>Что дальше.</b> Если вопросы попали в боль — обсудим задачу. Разберём, как устроен процесс сейчас, предложим архитектуру, состав модулей и порядок внедрения. <a href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer">Написать в Telegram</a> или <a href="mailto:ceo@indagor.online">ceo@indagor.online</a>.</div>
+  <div class="author-bio">
+   <div class="bio-eyebrow">Об авторе</div>
+   <p>Привет, я Евгений, основатель INDAGOR (Intelligent Digital Systems). Мы проектируем цифровые системы, которые связывают маркетинг, продажи и управление в один контур, — вместо набора разрозненных сервисов, где данные приходится сверять вручную.</p>
+   <p>До digital я управлял бизнесом в разных отраслях — от операционных процессов до международных проектов. Этот опыт и лёг в основу подхода, о котором написана статья: сначала архитектура и логика процессов, потом инструменты. Сейчас веду проекты INDAGOR лично — от решения до внедрения.</p>
+   <div class="bio-links">
+    <a href="https://www.linkedin.com/in/evgenii-indagor/" target="_blank" rel="noopener noreferrer me">LinkedIn — опыт и публикации</a>
+    <a href="/about/">О студии INDAGOR</a>
+    <a href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer">Telegram</a>
+   </div>
+  </div>
+
+  <div class="cta-block">
+   <div class="cta-eyebrow">Что дальше</div>
+   <p class="cta-lead">Если вопросы попали в боль — обсудим задачу. Разберём, как устроен процесс сейчас, предложим архитектуру, состав модулей и порядок внедрения. Первый шаг бесплатный: разбор без презентаций и обязательств.</p>
+   <div class="cta-actions">
+    <a class="cta-primary" href="https://t.me/INDAGOR_CEO" target="_blank" rel="noopener noreferrer" toolname="article_cta_telegram" tooldescription="Написать INDAGOR в Telegram, чтобы обсудить внедрение платформы">Написать в Telegram →</a>
+    <a class="cta-secondary" href="mailto:ceo@indagor.online?subject=%D0%92%D0%BD%D0%B5%D0%B4%D1%80%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D1%8B">Написать на почту</a>
+   </div>
+   <p class="cta-note">Ответим в рабочее время, обычно в течение дня. Без звонков «по цепочке» и передач третьим лицам.</p>
+  </div>
 
   <h2>Частые вопросы</h2>
 

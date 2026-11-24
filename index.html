@@ -533,6 +533,18 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 .footer-mail:hover{color:var(--gold2)}
 .footer-mail-ico{flex:0 0 auto;opacity:.9}
 .tgm-btn-copy.is-copied{background:rgba(214,173,99,.14);border-color:var(--gold);color:var(--gold2)}
+/* ===== Блок «Статьи» на главной ===== */
+.posts{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+@media(max-width:900px){.posts{grid-template-columns:1fr}}
+.post{position:relative;display:flex;flex-direction:column;gap:14px;padding:32px 30px;text-decoration:none;border:1px solid rgba(255,255,255,.09);background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.008));transition:border-color .25s,transform .25s}
+.post:hover{border-color:rgba(214,173,99,.55);transform:translateY(-3px)}
+.post:first-child{border-color:rgba(214,173,99,.32);background:linear-gradient(145deg,rgba(214,173,99,.10),rgba(255,255,255,.012))}
+.post-tag{color:var(--gold);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.post h3{font-family:var(--serif);font-weight:400;font-size:clamp(21px,2.2vw,27px);line-height:1.22;color:#f4f1e9;margin:0}
+.post:first-child h3{font-size:clamp(23px,2.6vw,31px)}
+.post p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}
+.post-meta{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:auto;padding-top:6px;color:#8e8b83;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.post-meta .post-go{color:var(--gold2)}
 </style>
 <meta name="analytics-endpoint" content="https://bright-wisp-6c6965.netlify.app/track">
 <script defer src="/assets/analytics.js"></script>
@@ -618,6 +630,26 @@ p,li{font-size:var(--fs-body);line-height:1.75}
     <div class="step reveal"><b>01</b><h3>Погружение</h3><p>Разбираемся в целях, текущих процессах, ограничениях и критериях успеха.</p></div>
     <div class="step reveal"><b>02</b><h3>Архитектура</h3><p>Формируем концепцию, состав работ, технический подход и план реализации.</p></div>
     <div class="step reveal"><b>03</b><h3>Реализация</h3><p>Разрабатываем, тестируем, передаём решение и помогаем с дальнейшим развитием.</p></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="section" id="articles">
+  <div class="container">
+   <div class="section-head reveal"><div><div class="eyebrow">Статьи</div><h2>Разборы, которые<br>экономят деньги.</h2></div><p class="section-intro">Пишем о том, что видим в проектах: где бизнес теряет время и данные — и как это исправляется архитектурой, а не очередным сервисом.</p></div>
+   <div class="posts reveal">
+    <a class="post" href="/blog/edinnaya-platforma-vmesto-servisov/">
+     <div class="post-tag">Архитектура бизнеса · новая статья</div>
+     <h3>Десятки сервисов не спасают бизнес. Его спасает одна система</h3>
+     <p>Почему набор программ дороже одной платформы: стыковка, ошибки в данных, потерянные заявки — и как перейти к единому контуру без остановки бизнеса.</p>
+     <div class="post-meta"><time datetime="2026-11-24">24 ноября 2026</time><span>12 минут</span><span class="post-go">Читать →</span></div>
+    </a>
+    <a class="post" href="/blog/chto-avtomatizirovat-v-pervuyu-ochered/">
+     <div class="post-tag">Автоматизация</div>
+     <h3>Что автоматизировать в первую очередь: 5 процессов</h3>
+     <p>Заявки, ответы клиентам, отчётность, документы и сбор данных — критерии выбора и метрики эффекта.</p>
+     <div class="post-meta"><time datetime="2026-11-12">12 ноября 2026</time><span>10 минут</span><span class="post-go">Читать →</span></div>
+    </a>
    </div>
   </div>
  </section>
