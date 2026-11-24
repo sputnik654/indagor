@@ -5,8 +5,15 @@
   <link>https://indagor.ru/blog/</link>
   <description>Статьи INDAGOR о веб-разработке, AI-автоматизации, CRM и цифровых экосистемах коммерческой недвижимости.</description>
   <language>ru-RU</language>
-  <lastBuildDate>Sat, 14 Nov 2026 12:44:45 +0300</lastBuildDate>
+  <lastBuildDate>Tue, 24 Nov 2026 10:00:00 +0300</lastBuildDate>
   <atom:link href="https://indagor.ru/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+   <title>Десятки сервисов не спасают бизнес. Его спасает одна система</title>
+   <link>https://indagor.ru/blog/edinnaya-platforma-vmesto-servisov/</link>
+   <guid isPermaLink="true">https://indagor.ru/blog/edinnaya-platforma-vmesto-servisov/</guid>
+   <description>Как связать заявки, CRM, операционный учёт и аналитику в один контур — и почему это дешевле набора сервисов.</description>
+   <pubDate>Tue, 24 Nov 2026 10:00:00 +0300</pubDate>
+  </item>
   <item>
    <title>Что автоматизировать в первую очередь: 5 процессов, которые съедают время бизнеса</title>
    <link>https://indagor.ru/blog/chto-avtomatizirovat-v-pervuyu-ochered/</link>
