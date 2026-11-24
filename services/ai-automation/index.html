@@ -302,6 +302,15 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  .poster .container{width:100%;max-width:none;padding:0}
  .poster .floating-image{width:100%;padding:15px;margin-bottom:12px}
 }
+
+/* --- Сравнительные таблицы (GEO) --- */
+.table-wrap{overflow-x:auto;margin:22px 0 6px;-webkit-overflow-scrolling:touch}
+.table-wrap table{width:100%;min-width:640px;border-collapse:collapse;font-size:13.5px}
+.table-wrap th,.table-wrap td{text-align:left;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top;color:#cfcdc5}
+.table-wrap th{color:var(--gold);font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-bottom-color:rgba(214,173,99,.35)}
+.table-wrap tr:last-child td{border-bottom:0}
+.table-wrap td:first-child{color:#fff;font-weight:500}
+@media(max-width:700px){.table-wrap table{min-width:560px}}
 </style>
 <meta name="analytics-endpoint" content="https://bright-wisp-6c6965.netlify.app/track">
 <script defer src="/assets/analytics.js"></script>
@@ -327,7 +336,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  </div></section>
 <figure class="poster"><div class="container">
   <div class="floating-image">
-   <img src="/assets/ai-automation-hero.webp" alt="AI и автоматизация INDAGOR: золотая статуя, планета с сетью связей, голографический дашборд" width="835" height="941" loading="eager" fetchpriority="high" decoding="async">
+   <img src="/assets/ai-automation-hero.webp" srcset="/assets/ai-automation-hero-480.webp 480w, /assets/ai-automation-hero-720.webp 720w, /assets/ai-automation-hero.webp 835w" sizes="(max-width: 700px) calc(100vw - 30px), 640px" alt="AI и автоматизация INDAGOR: золотая статуя, планета с сетью связей, голографический дашборд" width="835" height="941" loading="eager" fetchpriority="high" decoding="async">
   </div>
 </div></figure>
 
@@ -349,11 +358,29 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  <section><div class="container">
   <div class="eyebrow">Процесс</div>
   <h2>Как проходит работа</h2>
-  <p class="intro">Порядок тот же, что и в разработке цифровых продуктов: сначала задача и критерии результата, потом технология.</p>
+  <p class="intro">Автоматизация начинается не с выбора технологии, а с ответа на вопрос: где сейчас теряется время и как вы поймёте, что стало лучше. Сначала смотрим процесс — кто и что делает вручную, сколько раз в день, где ошибки. Потом фиксируем критерий результата: быстрее ответ клиенту, меньше ручного ввода, прозрачная отчётность. И только после этого выбирается инструмент: ассистент, обработка документов, интеграция или обычный скрипт, который просто экономит шаги. Первый сценарий делается отдельно и запускается в работу — так вы видите эффект на своём процессе, а не на демо. Объём следующего этапа определяется тем, что показал первый. Отдельный разговор — данные: если исходные сведения ведутся в таблицах и никем не проверяются, автоматизация только быстрее размножит ошибку.</p>
   <div class="steps">
    <div class="step"><b>01</b><h3>Аудит процесса</h3><p>Разбираем процесс, считаем объём ручной работы и выбираем участок для пилота.</p></div>
    <div class="step"><b>02</b><h3>Сценарии и данные</h3><p>Определяем сценарии, источники данных, интеграции и способ контроля качества.</p></div>
    <div class="step"><b>03</b><h3>Пилот и запуск</h3><p>Собираем, тестируем на реальных данных, передаём и сопровождаем после запуска.</p></div>
+  </div>
+ </div></section>
+
+ <section id="scope"><div class="container">
+  <div class="eyebrow">Состав и формат</div>
+  <h2>Сценарии автоматизации и что они заменяют</h2>
+  <p class="intro">Автоматизировать имеет смысл не «всё», а участок, где время уходит на повторяющиеся действия и ошибки видны сразу. Первыми обычно идут входящие обращения: заявки с сайта, почты и мессенджеров собираются в один список с ответственным и сроком. Второй по эффекту участок — типовые ответы клиентам: ассистент отвечает на повторяющиеся вопросы по вашей базе знаний, человек подключается на сложных случаях. Дальше — документы и отчётность: счета и накладные распознаются, данные попадают в учётную систему без ручного ввода. Каждый сценарий запускается отдельно, поэтому результат виден через несколько недель, а не в конце большого проекта. Порядок запуска обычно такой: сначала один сценарий в одном отделе, потом расширение на смежные процессы.</p>
+  <div class="table-wrap">
+   <table>
+    <thead><tr><th>Сценарий</th><th>Что заменяет</th><th>Что нужно на входе</th><th>Как измерить эффект</th></tr></thead>
+    <tbody>
+      <tr><td>Обработка обращений</td><td>Ручной разбор заявок из почты, мессенджеров и форм</td><td>Список каналов и правила распределения</td><td>Время первого ответа, доля потерянных заявок</td></tr>
+      <tr><td>Ответы на типовые вопросы</td><td>Повторяющиеся ответы менеджеров</td><td>База знаний и границы тем</td><td>Доля обращений, закрытых без человека</td></tr>
+      <tr><td>Документы</td><td>Ручной ввод счетов, накладных, договоров</td><td>Образцы документов и правила проверки</td><td>Доля документов без ручной правки</td></tr>
+      <tr><td>Отчётность</td><td>Сбор цифр из нескольких систем вручную</td><td>Доступы к источникам и список показателей</td><td>Часы на подготовку отчёта</td></tr>
+      <tr><td>Сбор внешних данных</td><td>Ручной мониторинг цен, вакансий, упоминаний</td><td>Список источников и частота проверки</td><td>Полнота выгрузки, скорость обновления</td></tr>
+    </tbody>
+   </table>
   </div>
  </div></section>
 

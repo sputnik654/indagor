@@ -304,6 +304,15 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  .poster .container{width:100%;max-width:none;padding:0}
  .poster .floating-image{width:100%;padding:15px;margin-bottom:12px}
 }
+
+/* --- Сравнительные таблицы (GEO) --- */
+.table-wrap{overflow-x:auto;margin:22px 0 6px;-webkit-overflow-scrolling:touch}
+.table-wrap table{width:100%;min-width:640px;border-collapse:collapse;font-size:13.5px}
+.table-wrap th,.table-wrap td{text-align:left;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top;color:#cfcdc5}
+.table-wrap th{color:var(--gold);font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-bottom-color:rgba(214,173,99,.35)}
+.table-wrap tr:last-child td{border-bottom:0}
+.table-wrap td:first-child{color:#fff;font-weight:500}
+@media(max-width:700px){.table-wrap table{min-width:560px}}
 </style>
 <meta name="analytics-endpoint" content="https://bright-wisp-6c6965.netlify.app/track">
 <script defer src="/assets/analytics.js"></script>
@@ -329,7 +338,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  </div></section>
 <figure class="poster"><div class="container">
   <div class="floating-image">
-   <img src="/assets/crm-analytics-hero.webp" alt="CRM и управленческая аналитика INDAGOR" width="835" height="933" loading="eager" fetchpriority="high" decoding="async">
+   <img src="/assets/crm-analytics-hero.webp" srcset="/assets/crm-analytics-hero-480.webp 480w, /assets/crm-analytics-hero-720.webp 720w, /assets/crm-analytics-hero.webp 835w" sizes="(max-width: 700px) calc(100vw - 30px), 640px" alt="CRM и управленческая аналитика INDAGOR" width="835" height="933" loading="eager" fetchpriority="high" decoding="async">
   </div>
 </div></figure>
 
@@ -351,11 +360,29 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  <section><div class="container">
   <div class="eyebrow">Принцип</div>
   <h2>Цифры, по которым принимают решения</h2>
-  <p class="intro">Отчётность нужна не для отчёта. Каждый показатель должен отвечать на конкретный вопрос руководителя.</p>
+  <p class="intro">Отчётность нужна не для отчёта, а для решения. Поэтому сначала формулируется вопрос руководителя — сколько заявок пришло за неделю, на каком этапе теряются сделки, кто из менеджеров не отвечает в срок, — и только под него собирается показатель. Дальше проверяем, откуда берутся данные: если источник один и ведётся вручную, сначала наводится порядок в источнике. Затем показатель выводится в дашборд, где видна динамика и можно провалиться в детали. Так отчёт не превращается в набор графиков: каждый блок отвечает на свой вопрос, а если ответ не меняет решений, блок убирается. Отдельный вопрос — кто отвечает за данные: если у показателя нет владельца, он быстро расходится с реальностью.</p>
   <div class="steps">
    <div class="step"><b>01</b><h3>Один источник правды</h3><p>Данные живут в одной системе, а не в пяти таблицах и переписках. Расхождения исключены по конструкции.</p></div>
    <div class="step"><b>02</b><h3>Показатель под решение</h3><p>В дашборд попадает только то, что меняет действие. Лишние метрики — причина, по которой отчёт перестают открывать.</p></div>
    <div class="step"><b>03</b><h3>Без ручного сбора</h3><p>Данные подтягиваются из систем автоматически. Отчёт не зависит от того, кто его собирает и когда вспомнил.</p></div>
+  </div>
+ </div></section>
+
+ <section id="scope"><div class="container">
+  <div class="eyebrow">Состав и формат</div>
+  <h2>Что появляется после настройки CRM</h2>
+  <p class="intro">CRM нужна не для хранения контактов, а для ответа на вопросы: сколько заявок пришло, что с ними стало, где теряются деньги. Настройка начинается с воронки: какие этапы проходит сделка, кто отвечает на каждом, что считается успехом. Затем — единый реестр: заявки из сайта, почты и мессенджеров попадают в одно место, дубли склеиваются, история сохраняется. Потом появляется отчётность: конверсия по этапам, срок ответа, нагрузка на менеджеров, причины отказов. Объём зависит от числа источников заявок и правил, по которым вы работаете. Отчёты собираются из ваших данных, а не из средних значений по рынку, поэтому ими можно пользоваться в решениях. Отдельно фиксируем, какие решения принимаются по каждому блоку, — иначе дашборд превращается в красивую картинку.</p>
+  <div class="table-wrap">
+   <table>
+    <thead><tr><th>Что настраиваем</th><th>Что видно руководителю</th><th>Что нужно на входе</th><th>От чего зависит объём</th></tr></thead>
+    <tbody>
+      <tr><td>Воронка и этапы</td><td>Где сделки останавливаются и сколько стоят потери</td><td>Описание текущего процесса продаж</td><td>От числа этапов и правил перехода</td></tr>
+      <tr><td>Единый реестр заявок</td><td>Сколько заявок реально пришло, ни одна не потеряна</td><td>Список источников: сайт, почта, мессенджеры</td><td>От числа источников и качества данных</td></tr>
+      <tr><td>Задачи и сроки</td><td>Кто и когда должен ответить, где просрочки</td><td>Правила распределения и сроки реакции</td><td>От размера команды и ролей</td></tr>
+      <tr><td>Дашборд</td><td>Конверсия, срок ответа, нагрузка, причины отказов</td><td>Доступы к системам и список показателей</td><td>От количества показателей и их источников</td></tr>
+      <tr><td>Интеграции</td><td>Данные не переносятся вручную между системами</td><td>Список систем и способ обмена</td><td>От сложности обмена данными</td></tr>
+    </tbody>
+   </table>
   </div>
  </div></section>
 

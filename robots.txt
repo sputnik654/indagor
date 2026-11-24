@@ -2,42 +2,73 @@
 # Классические поисковики: полный доступ
 User-agent: *
 Allow: /
-# Служебные файлы: конфигурация Netlify и зависимости функций (сайт на GitHub Pages,
-# но эти файлы попадают в публикацию — индексировать их незачем).
+# Служебные файлы аналитики Netlify (функции /track и /stats). Сайт на GitHub Pages,
+# но эти файлы лежат в публикуемой ветке — индексировать их незачем.
+# Disallow продублирован в КАЖДОЙ группе ниже: по RFC 9309 группы независимы,
+# и AI-краулер с «Allow: /» не наследует правила из группы «*».
 Disallow: /netlify/
 Disallow: /netlify.toml
 Disallow: /package.json
-Disallow: /package-lock.json
 
 # --- AI-краулеры: разрешены явно, чтобы сайт могли цитировать LLM ---
 User-agent: GPTBot
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: CCBot
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 User-agent: YandexAdditional
 Allow: /
+Disallow: /netlify/
+Disallow: /netlify.toml
+Disallow: /package.json
 
 Sitemap: https://indagor.ru/sitemap.xml

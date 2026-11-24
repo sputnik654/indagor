@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080909">
 <title>Что автоматизировать в первую очередь в бизнесе — 5 процессов</title>
-<meta name="description" content="Пять процессов, которые чаще всего съедают время бизнеса: заявки, ответы клиентам, отчётность, документы, сбор данных. Как автоматизировать и как измерить эффект.">
+<meta name="description" content="Пять процессов, которые съедают время бизнеса: заявки, ответы клиентам, отчётность, документы, сбор данных. Как автоматизировать их и чем измерять эффект.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="https://indagor.ru/blog/chto-avtomatizirovat-v-pervuyu-ochered/">
  <link rel="alternate" hreflang="ru" href="https://indagor.ru/blog/chto-avtomatizirovat-v-pervuyu-ochered/">
@@ -303,6 +303,16 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  .poster .container{width:100%;max-width:none;padding:0}
  .poster .floating-image{width:100%;padding:15px;margin-bottom:0}
 }
+
+/* --- Сравнительные таблицы (GEO) --- */
+.table-wrap{overflow-x:auto;margin:22px 0 6px;-webkit-overflow-scrolling:touch}
+.table-wrap table{width:100%;min-width:640px;border-collapse:collapse;font-size:13.5px}
+.table-wrap th,.table-wrap td{text-align:left;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top;color:#cfcdc5}
+.table-wrap th{color:var(--gold);font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-bottom-color:rgba(214,173,99,.35)}
+.table-wrap tr:last-child td{border-bottom:0}
+.table-wrap td:first-child{color:#fff;font-weight:500}
+@media(max-width:700px){.table-wrap table{min-width:560px}}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 </style>
 <meta name="analytics-endpoint" content="https://bright-wisp-6c6965.netlify.app/track">
 <script defer src="/assets/analytics.js"></script>
@@ -325,7 +335,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 
   <figure class="poster"><div class="container">
    <div class="floating-image">
-    <img src="/assets/blog-automation-hero.webp" alt="Автоматизация бизнеса INDAGOR" width="823" height="939" loading="lazy" decoding="async">
+    <img src="/assets/blog-automation-hero.webp" srcset="/assets/blog-automation-hero-480.webp 480w, /assets/blog-automation-hero-720.webp 720w, /assets/blog-automation-hero.webp 823w" sizes="(max-width: 700px) calc(100vw - 30px), 640px" alt="Автоматизация бизнеса INDAGOR" width="823" height="939" loading="lazy" decoding="async">
    </div>
   </div></figure>
 
@@ -393,6 +403,22 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   </ul>
   <p><strong>Что остаётся человеку:</strong> анализ и выводы. Сбор — механическая работа, интерпретация — нет.</p>
   <p><strong>Как измерить эффект:</strong> количество источников под наблюдением, частота обновления, время на подготовку сводки.</p>
+
+  <h2>Сводная таблица: пять процессов</h2>
+  <p>Та же логика выбора — в одной таблице. Колонка «признак» отвечает на вопрос «начинать или ещё рано», колонка «что измерять» задаёт метрику, по которой видно эффект через месяц.</p>
+  <div class="table-wrap">
+  <table>
+    <caption class="visually-hidden">Сводная таблица: пять процессов автоматизации, признак, что пора начинать, и метрика эффекта</caption>
+    <thead><tr><th>Процесс</th><th>Признак, что пора автоматизировать</th><th>Что автоматизируется первым</th><th>Что измерять</th></tr></thead>
+    <tbody>
+      <tr><td>Входящие заявки</td><td>Заявки теряются между каналами, ответ приходит через часы</td><td>Единая точка приёма и распределение ответственного</td><td>Время первого ответа, доля потерянных заявок</td></tr>
+      <tr><td>Ответы на типовые вопросы</td><td>Менеджеры по десять раз в день отвечают одно и то же</td><td>Ответ по базе знаний с передачей человеку на сложном случае</td><td>Доля обращений, закрытых без человека</td></tr>
+      <tr><td>Отчётность</td><td>Отчёт собирают вручную из нескольких систем к каждому совещанию</td><td>Автоматический сбор данных и один дашборд</td><td>Часы на подготовку отчёта, полнота данных</td></tr>
+      <tr><td>Документы</td><td>Счета и накладные вводят руками, ошибки находят постфактум</td><td>Распознавание и проверка по правилам перед загрузкой</td><td>Доля документов без ручной правки</td></tr>
+      <tr><td>Сбор внешних данных</td><td>Цены, вакансии и упоминания проверяют вручную по расписанию</td><td>Регулярная выгрузка и оповещение об изменениях</td><td>Полнота выгрузки, скорость обновления</td></tr>
+    </tbody>
+  </table>
+</div>
 
   <h2>Как выбрать первый процесс</h2>
   <p>Если сомневаетесь, с чего начать, ответьте на пять вопросов по каждому кандидату:</p>
