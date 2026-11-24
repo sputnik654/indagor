@@ -2,11 +2,11 @@
   "name": "INDAGOR",
   "description": "INDAGOR — студия цифровой разработки: корпоративные сайты и веб-приложения, AI-автоматизация бизнес-процессов, CRM и управленческая аналитика, платформа «Клондайк» для коммерческой недвижимости.",
   "url": "https://indagor.ru/",
-  "lastModified": "2026-11-14",
+  "lastModified": "2026-11-24",
   "@context": "https://schema.org",
   "documentType": "ai-summary",
   "version": "1.0",
-  "lastUpdated": "2026-11-14",
+  "lastUpdated": "2026-11-24",
   "language": "ru",
   "organization": {
     "@type": "Organization",
@@ -25,7 +25,8 @@
       "type": "telegram",
       "url": "https://t.me/INDAGOR_CEO",
       "handle": "@INDAGOR_CEO",
-      "note": "Telegram — основной канал связи по задачам, презентациям и вопросам."
+      "note": "Telegram — основной канал связи по задачам, презентациям и вопросам; email — для документов и официальной переписки.",
+      "email": "ceo@indagor.online"
     },
     "channel": "https://t.me/indagor_digital",
     "sameAs": [

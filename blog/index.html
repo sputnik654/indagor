@@ -248,6 +248,12 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   box-shadow:0 0 34px 12px rgba(214,173,99,.45),0 0 80px 24px rgba(214,173,99,.2);
   filter:drop-shadow(0 14px 14px rgba(0,0,0,.85))}
 }
+
+/* ===== Контактный email: подвал, модалка, состояние «скопировано» ===== */
+.footer-mail{display:inline-flex;align-items:center;gap:8px;border:0;color:var(--gold);text-decoration:none;line-height:20px;padding:12px 0}
+.footer-mail:hover{color:var(--gold2)}
+.footer-mail-ico{flex:0 0 auto;opacity:.9}
+.tgm-btn-copy.is-copied{background:rgba(214,173,99,.14);border-color:var(--gold);color:var(--gold2)}
 </style>
 <meta name="analytics-endpoint" content="https://bright-wisp-6c6965.netlify.app/track">
 <script defer src="/assets/analytics.js"></script>
@@ -291,6 +297,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  <a href="/about/">О студии</a>
  <a href="/offer.html">Оферта</a>
  <a href="/privacy.html">Политика конфиденциальности</a>
+ <a class="footer-mail" href="mailto:ceo@indagor.online" toolname="contact_email" tooldescription="Написать INDAGOR на ceo@indagor.online"><svg class="footer-mail-ico" width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM98.71,128,40,181.81V74.19ZM116.74,144h22.52L198,208H54ZM157.29,128,216,74.19V181.81ZM216,64l-88,80L40,64Z"/></svg>ceo@indagor.online</a>
 </div>
  <div class="container"><p class="footer-note">INDAGOR — российская разработка цифровых продуктов и AI-систем для бизнеса. Официальный сайт — indagor.ru.</p></div>
 </footer>
@@ -311,6 +318,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   <h2 class="tgm-title" id="tgModalTitle">Связаться с нами</h2>
   <p class="tgm-sub">Telegram — основной канал связи: задачи, презентации, вопросы.</p>
   <a class="tgm-btn tgm-btn-primary" id="tgOpen" href="tg://resolve?domain=INDAGOR_CEO" toolname="open_telegram" tooldescription="Открыть чат с INDAGOR в приложении Telegram">Открыть Telegram</a>
+  <a class="tgm-btn tgm-btn-copy" id="tgEmail" href="mailto:ceo@indagor.online" toolname="contact_email" tooldescription="Написать INDAGOR на ceo@indagor.online">Написать на почту</a>
   <button type="button" class="tgm-btn tgm-btn-copy" id="tgCopy" aria-label="Скопировать ник @INDAGOR_CEO в буфер обмена" aria-live="polite" toolname="copy_telegram_handle" tooldescription="Скопировать ник @INDAGOR_CEO в буфер обмена, чтобы написать в Telegram вручную">Скопировать ник @INDAGOR_CEO</button>
   <p class="tgm-hint" id="tgModalHint">Если Telegram не открылся, скопируйте ник и напишите нам в приложении.</p>
  </div>
@@ -323,6 +331,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  var closeBtn=document.getElementById('tgClose');
  var openBtn=document.getElementById('tgOpen');
  var copyBtn=document.getElementById('tgCopy');
+ var emailBtn=document.getElementById('tgEmail');
  var lastFocus=null;
  function closestLink(el){
   while(el&&el!==document){
@@ -344,6 +353,7 @@ p,li{font-size:var(--fs-body);line-height:1.75}
   if(lastFocus&&lastFocus.focus){lastFocus.focus();}
  }
  document.addEventListener('click',function(e){
+  if(overlay.contains(e.target)){return;}
   var a=closestLink(e.target);
   if(a){openModal(e);}
  });
@@ -352,6 +362,46 @@ p,li{font-size:var(--fs-body);line-height:1.75}
  document.addEventListener('keydown',function(e){
   if(e.key==='Escape'&&overlay.classList.contains('is-open')){closeModal();}
  });
+ if(emailBtn){
+  var MAIL='ceo@indagor.online';
+  var emailTimer=null;
+  var emailOriginal=emailBtn.textContent;
+  emailBtn.setAttribute('aria-live','polite');
+  function emailReset(){
+   emailBtn.textContent=emailOriginal;
+   emailBtn.classList.remove('is-copied');
+   emailBtn.setAttribute('aria-label','Скопировать адрес ceo@indagor.online');
+  }
+  function emailDone(){
+   emailBtn.textContent='Адрес скопирован';
+   emailBtn.classList.add('is-copied');
+   emailBtn.setAttribute('aria-label','Адрес ceo@indagor.online скопирован в буфер обмена');
+   if(emailTimer){clearTimeout(emailTimer);}
+   emailTimer=setTimeout(emailReset,2000);
+  }
+  function emailFallbackCopy(){
+   var ta=document.createElement('textarea');
+   ta.value=MAIL;ta.setAttribute('readonly','');
+   ta.style.position='absolute';ta.style.left='-9999px';ta.style.top='0';
+   document.body.appendChild(ta);ta.select();
+   var ok=false;
+   try{ok=document.execCommand('copy');}catch(err){ok=false;}
+   document.body.removeChild(ta);
+   return ok;
+  }
+  emailBtn.setAttribute('aria-label','Скопировать адрес ceo@indagor.online');
+  emailBtn.addEventListener('click',function(e){
+   if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey){return;}
+   if(navigator.clipboard&&navigator.clipboard.writeText){
+    e.preventDefault();
+    navigator.clipboard.writeText(MAIL).then(emailDone).catch(function(){
+     if(emailFallbackCopy()){emailDone();}else{window.location.href='mailto:'+MAIL;}
+    });
+   }else{
+    if(emailFallbackCopy()){e.preventDefault();emailDone();}
+   }
+  });
+ }
  if(copyBtn){
   copyBtn.addEventListener('click',function(){
    var original=copyBtn.textContent;

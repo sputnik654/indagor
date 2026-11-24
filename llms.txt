@@ -30,6 +30,7 @@ This site is available for AI indexing and retrieval at https://indagor.ru.
 ## Контакты
 
 - [Связаться (личные сообщения)](https://t.me/INDAGOR_CEO): обсуждение задач и запрос презентации проекта «Клондайк (Klondayk)».
+- Email: ceo@indagor.online — задачи, документы, презентации, вопросы по договору.
 - [Telegram-канал INDAGOR](https://t.me/indagor_digital): публичный канал студии.
 
 ## Машинные файлы / Machine-readable files
@@ -46,4 +47,4 @@ This site is available for AI indexing and retrieval at https://indagor.ru.
 - Crawling: https://indagor.ru/robots.txt explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, YandexAdditional.
 - Structured data on the page: Organization (sameAs, contactPoint), WebPage (dates, author), WebSite (SearchAction), 4 × Service, Product («Клондайк (Klondayk)»), FAQPage with 5 questions.
 - Sitemap: https://indagor.ru/sitemap.xml
-- Contact for AI agents and humans: https://t.me/INDAGOR_CEO
+- Contact for AI agents and humans: ceo@indagor.online, https://t.me/INDAGOR_CEO
