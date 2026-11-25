@@ -1,0 +1,21 @@
+# _redirects — Cloudflare Pages (indagor.ru)
+# Формат: <откуда> <куда> <код>
+# Все правила — 301, постоянные.
+
+# Дубль главной: /index.html не должен отдавать 200
+/index.html            /                 301
+
+# Дубль вложенных страниц: /about/index.html и т.п.
+/*/index.html          /:splat/          301
+
+# Канонический слэш (страховка, если Pages не редиректит сам)
+/klondayk              /klondayk/        301
+/klondayk/presentation /klondayk/presentation/ 301
+/about                 /about/           301
+/blog                  /blog/            301
+/services/web-development /services/web-development/ 301
+/services/ai-automation   /services/ai-automation/  301
+/services/crm-analytics   /services/crm-analytics/  301
+
+# http -> https, www -> apex настраиваются на уровне зоны Cloudflare,
+# в _redirects не дублируются (иначе цикл на apex-домене).
