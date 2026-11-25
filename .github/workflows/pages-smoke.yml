@@ -77,6 +77,39 @@ jobs:
           done
           exit $fail
 
+      - name: Живой домен indagor.online (после переезда на Cloudflare)
+        run: |
+          set -u
+          fail=0
+          host=indagor.online
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+          while read -r p want; do
+            [ -z "${p:-}" ] && continue
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 --retry 2 --retry-delay 2 "https://$host$p" || echo 000)
+            if [ "$code" = "$want" ]; then printf 'OK   %-18s %-28s %s\n' "$host" "$p" "$code"
+            else printf 'FAIL %-18s %-28s %s (ожидался %s)\n' "$host" "$p" "$code" "$want"; fail=1; fi
+          done <<'LIST'
+          / 200
+          /klondayk/ 200
+          /offer/ 200
+          /privacy/ 200
+          /offer.html 301
+          /privacy.html 301
+          /llms.txt 200
+          /sitemap.xml 200
+          /robots.txt 200
+          /ai/summary.json 200
+          /.well-known/ai.txt 200
+          /nope-xyz 404
+          /track 405
+          /stats 401
+          LIST
+          out=$(curl -sS -m 25 --retry 2 -X POST "https://$host/track" -H 'content-type: text/plain;charset=UTF-8' -A "$UA" \
+                --data-binary '{"type":"pageview","consent":false,"path":"/__smoke__/","ua_type":"desktop","lang":"en-US","viewport":1280}')
+          echo "POST https://$host/track -> $out"
+          case "$out" in *'"ok":true'*) ;; *) echo "FAIL события не принимаются"; fail=1 ;; esac
+          exit $fail
+
       - name: Статистика по токену (если секрет задан)
         env:
           STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
