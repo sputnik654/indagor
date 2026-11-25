@@ -77,11 +77,11 @@ jobs:
           done
           exit $fail
 
-      - name: Живой домен indagor.online (после переезда на Cloudflare)
+      - name: Живые домены indagor.ru и indagor.online
         run: |
           set -u
           fail=0
-          host=indagor.online
+          for host in indagor.ru indagor.online; do
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
           while read -r p want; do
             [ -z "${p:-}" ] && continue
@@ -104,17 +104,18 @@ jobs:
           /track 405
           /stats 401
           LIST
-          out=$(curl -sS -m 25 --retry 2 -X POST "https://$host/track" -H 'content-type: text/plain;charset=UTF-8' -A "$UA" \
-                --data-binary '{"type":"pageview","consent":false,"path":"/__smoke__/","ua_type":"desktop","lang":"en-US","viewport":1280}')
-          echo "POST https://$host/track -> $out"
-          case "$out" in *'"ok":true'*) ;; *) echo "FAIL события не принимаются"; fail=1 ;; esac
+            out=$(curl -sS -m 25 --retry 2 -X POST "https://$host/track" -H 'content-type: text/plain;charset=UTF-8' -A "$UA" \
+                  --data-binary '{"type":"pageview","consent":false,"path":"/__smoke__/","ua_type":"desktop","lang":"en-US","viewport":1280}')
+            echo "POST https://$host/track -> $out"
+            case "$out" in *'"ok":true'*) ;; *) echo "FAIL $host: события не принимаются"; fail=1 ;; esac
+          done
           exit $fail
 
       - name: www → apex 301
         run: |
           set -u
           fail=0
-          for host in www.indagor.online; do
+          for host in www.indagor.ru www.indagor.online; do
             loc=$(curl -sS -o /dev/null -D - -m 25 --retry 2 "https://$host/offer/?x=1" \
                   | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r')
             code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 --retry 2 "https://$host/")
