@@ -2,6 +2,10 @@
 # Формат: <откуда> <куда> <код>
 # Все правила — 301, постоянные.
 
+# Clean URLs с 25.11.2026: старые .html-адреса ведут на каталоги
+/offer.html            /offer/            301
+/privacy.html          /privacy/          301
+
 # Дубль главной: /index.html не должен отдавать 200
 /index.html            /                 301
 
@@ -9,6 +13,8 @@
 /*/index.html          /:splat/          301
 
 # Канонический слэш (страховка, если Pages не редиректит сам)
+/offer                 /offer/           301
+/privacy               /privacy/         301
 /klondayk              /klondayk/        301
 /klondayk/presentation /klondayk/presentation/ 301
 /about                 /about/           301

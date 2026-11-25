@@ -1,0 +1,78 @@
+name: Pages smoke test
+
+# Внешняя проверка деплоя Cloudflare Pages. Запускается вручную и на каждый пуш в main.
+# Из России *.pages.dev недоступен (фильтрация по SNI), поэтому проверка идёт с раннера GitHub.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Коды ответов
+        run: |
+          set -u
+          fail=0
+          check() { # host path expected
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 "https://$1$2" || echo 000)
+            if [ "$code" = "$3" ]; then printf 'OK   %-32s %-28s %s\n' "$1" "$2" "$code"
+            else printf 'FAIL %-32s %-28s %s (ожидался %s)\n' "$1" "$2" "$code" "$3"; fail=1; fi
+          }
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+            for p in / /klondayk/ /offer/ /privacy/ /about/ /blog/ /sitemap.xml /robots.txt \
+                     /llms.txt /ai.txt /.well-known/ai.txt /ai/summary.json; do
+              check "$host" "$p" 200
+            done
+            check "$host" /nope-xyz 404
+            check "$host" /offer.html 301
+            check "$host" /privacy.html 301
+            check "$host" /track 405
+            check "$host" /stats 401
+          done
+          exit $fail
+
+      - name: Редиректы ведут на clean URLs
+        run: |
+          fail=0
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+            for pair in "offer.html:/offer/" "privacy.html:/privacy/"; do
+              old="${pair%%:*}"; want="${pair##*:}"
+              loc=$(curl -sS -o /dev/null -D - -m 25 "https://$host/$old" | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r')
+              if [ "$loc" = "$want" ]; then echo "OK   $host/$old -> $loc"
+              else echo "FAIL $host/$old -> '$loc' (ожидался $want)"; fail=1; fi
+            done
+          done
+          exit $fail
+
+      - name: POST /track пишет событие
+        run: |
+          fail=0
+          ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+            body='{"type":"pageview","consent":false,"path":"/__smoke__/","ua_type":"desktop","lang":"en-US","viewport":1280}'
+            out=$(curl -sS -m 25 -X POST "https://$host/track" -H 'content-type: text/plain;charset=UTF-8' -A "$ua" --data-binary "$body")
+            echo "$host -> $out"
+            case "$out" in
+              *'"ok":true'*'skipped'*) echo "FAIL $host: событие отброшено ($out)"; fail=1 ;;
+              *'"ok":true'*) echo "OK   $host: событие принято" ;;
+              *) echo "FAIL $host: неожиданный ответ"; fail=1 ;;
+            esac
+          done
+          exit $fail
+
+      - name: JSON-LD отдаётся в сыром HTML
+        run: |
+          fail=0
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+            for p in / /klondayk/; do
+              html=$(curl -sS -m 25 "https://$host$p")
+              n=$(printf '%s' "$html" | grep -c 'application/ld+json')
+              types=$(printf '%s' "$html" | grep -o '"@type": *"[^"]*"' | head -6 | tr '\n' ' ')
+              if [ "$n" -ge 1 ]; then echo "OK   $host$p: блоков $n | $types"
+              else echo "FAIL $host$p: JSON-LD нет"; fail=1; fi
+            done
+          done
+          exit $fail

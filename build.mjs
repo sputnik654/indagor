@@ -13,10 +13,10 @@ const OUT = path.join(SRC, "dist");
 // Исключения на уровне корня и на любой глубине
 const EXCLUDE_ANY = new Set([
   ".git", "node_modules", "dist", ".wrangler",
-  "netlify", "netlify-public", "netlify.toml", "package.json", "package-lock.json",
-  "CNAME", ".nojekyll", ".gitignore", "build.mjs", "wrangler.toml",
+  "netlify", "netlify-public", "functions", "netlify.toml", "package.json", "package-lock.json",
+  "CNAME", ".nojekyll", ".gitignore", ".github", "build.mjs", "wrangler.toml",
 ]);
-const EXCLUDE_EXT = new Set([".md"]);
+const EXCLUDE_EXT = new Set([".md", ".sql"]);
 
 async function walk(dir, rel = "") {
   const ents = await readdir(dir, { withFileTypes: true });

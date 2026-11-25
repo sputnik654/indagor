@@ -37,12 +37,18 @@
     h = h.replace(/^www\./i, '').toLowerCase();
     return h === location.hostname.replace(/^www\./i, '').toLowerCase() ? '' : h;
   }
+  var urls = url.split('|');   /* первый адрес — основной, второй — резервный */
   function send(b) {
-    try {   /* text/plain: sendBeacon не умеет preflight */
-      if (n.sendBeacon && n.sendBeacon(url, new Blob([b], { type: 'text/plain;charset=UTF-8' }))) return;
-      fetch(url, { method: 'POST', mode: 'cors', credentials: 'omit', keepalive: true,
-        headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: b }).catch(function () {});
-    } catch (e) {}
+    var i = 0;
+    function one(u) {
+      return fetch(u, { method: 'POST', mode: 'cors', credentials: 'omit', keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: b })
+        .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r; });
+    }
+    (function next() {   /* при 4xx/5xx/сети — следующий адрес; ошибки не всплывают наружу */
+      if (i >= urls.length) return;
+      one(urls[i++].trim()).catch(next);
+    })();
   }
   function ev(type, extra) {
     var c = ok(), q = null, k;

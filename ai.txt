@@ -27,5 +27,5 @@ About: https://indagor.ru/about/
 Services: https://indagor.ru/services/web-development/, https://indagor.ru/services/ai-automation/, https://indagor.ru/services/crm-analytics/
 Product: https://indagor.ru/klondayk/
 Blog: https://indagor.ru/blog/
-Offer: https://indagor.ru/offer.html
-Privacy: https://indagor.ru/privacy.html
+Offer: https://indagor.ru/offer/
+Privacy: https://indagor.ru/privacy/
