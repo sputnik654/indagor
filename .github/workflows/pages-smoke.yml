@@ -21,7 +21,7 @@ jobs:
             if [ "$code" = "$3" ]; then printf 'OK   %-32s %-28s %s\n' "$1" "$2" "$code"
             else printf 'FAIL %-32s %-28s %s (ожидался %s)\n' "$1" "$2" "$code" "$3"; fail=1; fi
           }
-          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
             for p in / /klondayk/ /offer/ /privacy/ /about/ /blog/ /sitemap.xml /robots.txt \
                      /llms.txt /ai.txt /.well-known/ai.txt /ai/summary.json; do
               check "$host" "$p" 200
@@ -37,7 +37,7 @@ jobs:
       - name: Редиректы ведут на clean URLs
         run: |
           fail=0
-          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
             for pair in "offer.html:/offer/" "privacy.html:/privacy/"; do
               old="${pair%%:*}"; want="${pair##*:}"
               loc=$(curl -sS -o /dev/null -D - -m 25 "https://$host/$old" | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r')
@@ -51,7 +51,7 @@ jobs:
         run: |
           fail=0
           ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
             body='{"type":"pageview","consent":false,"path":"/__smoke__/","ua_type":"desktop","lang":"en-US","viewport":1280}'
             out=$(curl -sS -m 25 -X POST "https://$host/track" -H 'content-type: text/plain;charset=UTF-8' -A "$ua" --data-binary "$body")
             echo "$host -> $out"
@@ -66,7 +66,7 @@ jobs:
       - name: JSON-LD отдаётся в сыром HTML
         run: |
           fail=0
-          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
             for p in / /klondayk/; do
               html=$(curl -sS -m 25 "https://$host$p")
               n=$(printf '%s' "$html" | grep -c 'application/ld+json')
@@ -132,7 +132,7 @@ jobs:
         run: |
           fail=0
           if [ -z "${STATS_TOKEN:-}" ]; then echo "SKIP секрет STATS_TOKEN не задан"; exit 0; fi
-          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
             code=$(curl -sS -o /tmp/stats.json -w '%{http_code}' -m 25 -H "x-auth-token: $STATS_TOKEN" "https://$host/stats")
             if [ "$code" != "200" ]; then echo "FAIL $host/stats -> $code"; fail=1; continue; fi
             python3 - "$host" <<'PY2'
