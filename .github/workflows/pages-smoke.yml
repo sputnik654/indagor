@@ -111,6 +111,24 @@ jobs:
           done
           exit $fail
 
+      - name: Эндпоинт аналитики на живых страницах
+        run: |
+          set -u
+          fail=0
+          for host in indagor.ru indagor.online; do
+            html=$(curl -sS -m 25 --retry 2 "https://$host/")
+            ep=$(printf '%s' "$html" | grep -o 'analytics-endpoint" content="[^"]*"' | head -1)
+            echo "$host -> ${ep:-эндпоинт не найден}"
+            case "$ep" in
+              *"https://$host/track"*) echo "OK   $host: эндпоинт на своём домене" ;;
+              *) echo "FAIL $host: неожиданный эндпоинт"; fail=1 ;;
+            esac
+            if printf '%s' "$html" | grep -qi netlify; then
+              echo "FAIL $host: в HTML остались ссылки на Netlify"; fail=1
+            else echo "OK   $host: упоминаний Netlify в HTML нет"; fi
+          done
+          exit $fail
+
       - name: www → apex 301
         run: |
           set -u
