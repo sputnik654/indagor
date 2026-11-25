@@ -110,6 +110,21 @@ jobs:
           case "$out" in *'"ok":true'*) ;; *) echo "FAIL события не принимаются"; fail=1 ;; esac
           exit $fail
 
+      - name: www → apex 301
+        run: |
+          set -u
+          fail=0
+          for host in www.indagor.online; do
+            loc=$(curl -sS -o /dev/null -D - -m 25 --retry 2 "https://$host/offer/?x=1" \
+                  | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r')
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 --retry 2 "https://$host/")
+            echo "www-проверка $host: код=$code location=$loc"
+            want="https://${host#www.}/offer/?x=1"
+            if [ "$loc" = "$want" ]; then echo "OK   $host → $loc"
+            else echo "FAIL $host: '$loc' вместо '$want'"; fail=1; fi
+          done
+          exit $fail
+
       - name: Статистика по токену (если секрет задан)
         env:
           STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
