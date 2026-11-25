@@ -144,6 +144,9 @@ jobs:
           done
           exit $fail
 
+      - name: Валидация JSON-LD и Product (offers/review/aggregateRating)
+        run: python3 .github/scripts/check_jsonld.py indagor.ru indagor.online
+
       - name: Статистика по токену (если секрет задан)
         env:
           STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
