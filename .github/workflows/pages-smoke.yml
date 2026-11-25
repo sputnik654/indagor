@@ -76,3 +76,27 @@ jobs:
             done
           done
           exit $fail
+
+      - name: Статистика по токену (если секрет задан)
+        env:
+          STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
+        run: |
+          fail=0
+          if [ -z "${STATS_TOKEN:-}" ]; then echo "SKIP секрет STATS_TOKEN не задан"; exit 0; fi
+          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev; do
+            code=$(curl -sS -o /tmp/stats.json -w '%{http_code}' -m 25 -H "x-auth-token: $STATS_TOKEN" "https://$host/stats")
+            if [ "$code" != "200" ]; then echo "FAIL $host/stats -> $code"; fail=1; continue; fi
+            python3 - "$host" <<'PY2'
+          import json, sys
+          d = json.load(open("/tmp/stats.json"))
+          need = ["total", "total_anonymous", "total_consented", "consents", "sessions",
+                  "avg_duration_sec", "by_page", "by_day", "by_hour"]
+          miss = [k for k in need if k not in d]
+          print(f"OK   {sys.argv[1]}/stats total={d.get('total')} anon={d.get('total_anonymous')} "
+                f"consents={d.get('consents')} sessions={d.get('sessions')} pages={len(d.get('by_page') or {})}")
+          if miss:
+              print("FAIL нет полей:", miss); sys.exit(1)
+          PY2
+            [ $? -eq 0 ] || fail=1
+          done
+          exit $fail
