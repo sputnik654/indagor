@@ -1,39 +1,29 @@
 /* ==========================================================================
    INDAGOR — согласие на cookie и отложенная загрузка аналитики
-   Яндекс.Метрика (114183010) и Google Tag Manager (GTM-NC82SDKL) грузятся
-   ТОЛЬКО после нажатия «Принять» (localStorage: indagor_cookie_consent='1').
-   До согласия window.ym и window.dataLayer не создаются, сторонних
-   запросов к mc.yandex.ru / googletagmanager.com нет.
+   Яндекс.Метрика (114183010) подключается ТОЛЬКО после нажатия «Принять»
+   (localStorage: indagor_cookie_consent='1'). При отказе (='0') счётчик не
+   инициализируется вовсе, баннер больше не показывается.
+   Google Analytics / Google Tag Manager на сайте не используются.
+   Скрипт Метрики вставляется динамически с async — загрузка страницы не блокируется.
    ========================================================================== */
 (function () {
   'use strict';
 
   var KEY = 'indagor_cookie_consent';
   var METRIKA_ID = 114183010;
-  var GTM_ID = 'GTM-NC82SDKL';
   var started = false;
 
-  function hasConsent() {
-    try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; }
+  function getConsent() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
   }
-  function saveConsent() {
-    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  function setConsent(value) {
+    try { localStorage.setItem(KEY, value); } catch (e) {}
   }
 
-  /* Согласие дано: сообщаем всем слушателям. */
-  function broadcastConsent() {
+  function broadcastConsent(accepted) {
     try {
-      document.dispatchEvent(new CustomEvent('indagor:consent'));
+      document.dispatchEvent(new CustomEvent('indagor:consent', { detail: { accepted: accepted } }));
     } catch (e) {}
-  }
-
-  function startGTM() {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(GTM_ID);
-    (document.head || document.documentElement).appendChild(s);
   }
 
   function startMetrika() {
@@ -54,7 +44,6 @@
   function loadAnalytics() {
     if (started) return;
     started = true;
-    startGTM();
     startMetrika();
   }
   window.indagorLoadAnalytics = loadAnalytics;
@@ -70,19 +59,31 @@
     if (!bar) return;
     bar.hidden = false;
     document.body.classList.add('has-cookie');
-    var btn = document.getElementById('cookieAccept');
-    if (btn) {
-      btn.addEventListener('click', function () {
-        saveConsent();
+
+    var accept = document.getElementById('cookieAccept');
+    if (accept) {
+      accept.addEventListener('click', function () {
+        setConsent('1');
         hideBanner(bar);
         loadAnalytics();
-        broadcastConsent();
+        broadcastConsent(true);
+      });
+    }
+
+    var reject = document.getElementById('cookieReject');
+    if (reject) {
+      reject.addEventListener('click', function () {
+        setConsent('0');
+        hideBanner(bar);
+        broadcastConsent(false);
       });
     }
   }
 
   function boot() {
-    if (hasConsent()) { loadAnalytics(); return; }
+    var consent = getConsent();
+    if (consent === '1') { loadAnalytics(); return; }
+    if (consent === '0') { return; }          /* отказ запомнен — ни баннера, ни Метрики */
     showBanner();
   }
 

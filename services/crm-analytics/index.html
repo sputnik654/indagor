@@ -209,6 +209,8 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:24px 0;color:#9c998f;f
 .cookie-text{margin:0;font-size:13.5px;line-height:1.7;color:#c6c3ba;max-width:660px}
 .cookie-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .cookie-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 26px;border:1px solid var(--gold);background:linear-gradient(135deg,#f2d99d,#c89b4c);color:#17130b;font:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.cookie-btn-ghost{background:transparent;color:var(--gold2);border-color:rgba(214,173,99,.45)}
+.cookie-btn-ghost:hover{color:#fff;border-color:var(--gold)}
 .cookie-link{font-size:12px;color:var(--gold2);border-bottom:1px solid rgba(214,173,99,.45);padding:12px 0;line-height:20px}
 @media(max-width:900px){.grid,.steps{grid-template-columns:1fr 1fr}.faq-list{grid-template-columns:1fr;gap:0}}
 @media(max-width:640px){.grid,.steps{grid-template-columns:1fr}.nav{display:none}.hero{padding:20px 0 48px}h1{font-size:28px}
@@ -433,9 +435,10 @@ p,li{font-size:var(--fs-body);line-height:1.75}
 
 <aside class="cookie" id="cookieBar" aria-label="Согласие на использование cookie" hidden>
  <div class="container cookie-inner">
-  <p class="cookie-text">Мы используем файлы cookie и сервисы аналитики. До согласия работает только анонимный счётчик просмотров — без cookie, IP и идентификаторов посетителя. Яндекс.Метрика и Google включаются после нажатия «Принять».</p>
+  <p class="cookie-text">Мы используем cookie и сервисы аналитики. Яндекс.Метрика загружается только после нажатия «Принять»; при отказе она не включается. Анонимный счётчик GoatCounter работает без cookie и без персональных данных.</p>
   <div class="cookie-actions">
    <a class="cookie-link" href="/privacy/" target="_blank" rel="noopener">Политика конфиденциальности</a>
+   <button type="button" class="cookie-btn cookie-btn-ghost" id="cookieReject">Отклонить</button>
    <button type="button" class="cookie-btn" id="cookieAccept">Принять</button>
   </div>
  </div>
