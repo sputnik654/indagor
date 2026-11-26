@@ -1,6 +1,6 @@
 // build.mjs — подготовка каталога публикации для Cloudflare Pages.
 // Репозиторий остаётся корнем сайта для GitHub Pages; здесь собирается чистый dist/,
-// из которого убраны служебные файлы: аналитика Netlify, package.json, отчёты, CNAME.
+// из которого убраны служебные файлы: package.json, отчёты, CNAME.
 // Запуск: node build.mjs   ->   dist/
 
 import { cp, rm, mkdir, readdir, stat, copyFile } from "node:fs/promises";
@@ -13,7 +13,7 @@ const OUT = path.join(SRC, "dist");
 // Исключения на уровне корня и на любой глубине
 const EXCLUDE_ANY = new Set([
   ".git", "node_modules", "dist", ".wrangler",
-  "netlify", "netlify-public", "functions", "netlify.toml", "package.json", "package-lock.json",
+  "functions", "package.json", "package-lock.json",
   "CNAME", ".nojekyll", ".gitignore", ".github", "build.mjs", "wrangler.toml",
 ]);
 const EXCLUDE_EXT = new Set([".md", ".sql"]);

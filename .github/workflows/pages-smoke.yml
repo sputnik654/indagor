@@ -49,22 +49,6 @@ jobs:
           done
           exit $fail
 
-      - name: POST /track пишет событие
-        run: |
-          fail=0
-          ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
-            body='{"type":"pageview","consent":false,"path":"/__smoke__/","ua_type":"desktop","lang":"en-US","viewport":1280}'
-            out=$(curl -sS -m 25 -X POST "https://$host/track" -H 'content-type: text/plain;charset=UTF-8' -A "$ua" --data-binary "$body")
-            echo "$host -> $out"
-            case "$out" in
-              *'"ok":true'*'skipped'*) echo "FAIL $host: событие отброшено ($out)"; fail=1 ;;
-              *'"ok":true'*) echo "OK   $host: событие принято" ;;
-              *) echo "FAIL $host: неожиданный ответ"; fail=1 ;;
-            esac
-          done
-          exit $fail
-
       - name: JSON-LD отдаётся в сыром HTML
         run: |
           fail=0
@@ -113,24 +97,6 @@ jobs:
           done
           exit $fail
 
-      - name: Эндпоинт аналитики на живых страницах
-        run: |
-          set -u
-          fail=0
-          for host in indagor.ru indagor.online; do
-            html=$(curl -sS -m 25 --retry 2 "https://$host/")
-            ep=$(printf '%s' "$html" | grep -o 'analytics-endpoint" content="[^"]*"' | head -1)
-            echo "$host -> ${ep:-эндпоинт не найден}"
-            case "$ep" in
-              *"https://$host/track"*) echo "OK   $host: эндпоинт на своём домене" ;;
-              *) echo "FAIL $host: неожиданный эндпоинт"; fail=1 ;;
-            esac
-            if printf '%s' "$html" | grep -qi netlify; then
-              echo "FAIL $host: в HTML остались ссылки на Netlify"; fail=1
-            else echo "OK   $host: упоминаний Netlify в HTML нет"; fi
-          done
-          exit $fail
-
       - name: www → apex 301
         run: |
           set -u
@@ -149,26 +115,3 @@ jobs:
       - name: Валидация JSON-LD и Product (offers/review/aggregateRating)
         run: python3 .github/scripts/check_jsonld.py indagor.ru indagor.online
 
-      - name: Статистика по токену (если секрет задан)
-        env:
-          STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
-        run: |
-          fail=0
-          if [ -z "${STATS_TOKEN:-}" ]; then echo "SKIP секрет STATS_TOKEN не задан"; exit 0; fi
-          for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
-            code=$(curl -sS -o /tmp/stats.json -w '%{http_code}' -m 25 -H "x-auth-token: $STATS_TOKEN" "https://$host/stats")
-            if [ "$code" != "200" ]; then echo "FAIL $host/stats -> $code"; fail=1; continue; fi
-            python3 - "$host" <<'PY2'
-          import json, sys
-          d = json.load(open("/tmp/stats.json"))
-          need = ["total", "total_anonymous", "total_consented", "consents", "sessions",
-                  "avg_duration_sec", "by_page", "by_day", "by_hour"]
-          miss = [k for k in need if k not in d]
-          print(f"OK   {sys.argv[1]}/stats total={d.get('total')} anon={d.get('total_anonymous')} "
-                f"consents={d.get('consents')} sessions={d.get('sessions')} pages={len(d.get('by_page') or {})}")
-          if miss:
-              print("FAIL нет полей:", miss); sys.exit(1)
-          PY2
-            [ $? -eq 0 ] || fail=1
-          done
-          exit $fail

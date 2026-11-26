@@ -1,6 +1,6 @@
 # wrangler.toml — Cloudflare Pages, проект indagor-pages (indagor.ru)
 # Сайт статический, сборщика нет: build.mjs только готовит чистый dist/
-# (убирает netlify/, package.json, отчёты), затем wrangler заливает его.
+# (убирает package.json, отчёты), затем wrangler заливает его.
 #
 # Деплой: npx wrangler pages deploy dist --project-name indagor-pages --branch main
 

@@ -20,8 +20,7 @@
     try { localStorage.setItem(KEY, '1'); } catch (e) {}
   }
 
-  /* Согласие дано: сообщаем всем слушателям (собственный счётчик
-     /assets/analytics-tracker.js отправляет отложенный просмотр). */
+  /* Согласие дано: сообщаем всем слушателям. */
   function broadcastConsent() {
     try {
       document.dispatchEvent(new CustomEvent('indagor:consent'));
