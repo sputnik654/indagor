@@ -34,7 +34,7 @@ jobs:
           set -u
           fail=0
           edge() { # host -> cloudflare | github | unknown:<srv>
-            hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$1/")
+            hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$1/" || true)
             srv=$(printf '%s' "$hdr" | awk 'tolower($1)=="server:"{print $2; exit}' | tr -d '\r')
             case "$srv" in
               *loudflare*) echo cloudflare ;;
@@ -72,7 +72,7 @@ jobs:
           set -u
           fail=0
           edge() { # host -> cloudflare | github | unknown:<srv>
-            hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$1/")
+            hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$1/" || true)
             srv=$(printf '%s' "$hdr" | awk 'tolower($1)=="server:"{print $2; exit}' | tr -d '\r')
             case "$srv" in
               *loudflare*) echo cloudflare ;;
@@ -84,8 +84,8 @@ jobs:
             e=$(edge "$host")
             for pair in "offer.html:/offer/" "privacy.html:/privacy/"; do
               old="${pair%%:*}"; want="${pair##*:}"
-              code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 "https://$host/$old")
-              hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$host/$old")
+              code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 "https://$host/$old" || echo 000)
+              hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$host/$old" || true)
               loc=$(printf '%s' "$hdr" | awk 'tolower($1)=="location:"{print $2; exit}' | tr -d '\r')
               case "$e" in
                 cloudflare)
@@ -116,8 +116,8 @@ jobs:
           fail=0
           for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
             for p in / /klondayk/; do
-              html=$(curl -sS -m 25 "https://$host$p")
-              n=$(printf '%s' "$html" | grep -c 'application/ld+json')
+              html=$(curl -sS -m 25 "https://$host$p" || true)
+              n=$(printf '%s' "$html" | grep -c 'application/ld+json' || true)
               types=$(printf '%s' "$html" | grep -o '"@type": *"[^"]*"' | head -6 | tr '\n' ' ')
               if [ "$n" -ge 1 ]; then echo "OK   $host$p: блоков $n | $types"
               else echo "FAIL $host$p: JSON-LD нет"; fail=1; fi
@@ -130,10 +130,10 @@ jobs:
         run: |
           fail=0
           for host in indagor.ru indagor.online; do
-            html=$(curl -sS -m 30 --retry 2 --retry-delay 2 "https://$host/")
-            gc=$(printf '%s' "$html" | grep -c 'data-goatcounter')
-            src=$(printf '%s' "$html" | grep -c 'gc.zgo.at/count.js')
-            old=$(printf '%s' "$html" | grep -cE 'googletagmanager|mc\.yandex\.ru')
+            html=$(curl -sS -m 30 --retry 2 --retry-delay 2 "https://$host/" || true)
+            gc=$(printf '%s' "$html" | grep -c 'data-goatcounter' || true)
+            src=$(printf '%s' "$html" | grep -c 'gc.zgo.at/count.js' || true)
+            old=$(printf '%s' "$html" | grep -cE 'googletagmanager|mc\.yandex\.ru' || true)
             if [ "$gc" -ge 1 ] && [ "$src" -ge 1 ]; then
               echo "OK   $host: GoatCounter в HTML (data-goatcounter, gc.zgo.at/count.js)"
             else
@@ -176,9 +176,9 @@ jobs:
           set -u
           fail=0
           for host in www.indagor.ru www.indagor.online; do
-            loc=$(curl -sS -o /dev/null -D - -m 25 --retry 2 "https://$host/offer/?x=1" \
-                  | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r')
-            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 --retry 2 "https://$host/")
+            hdrs=$(curl -sS -o /dev/null -D - -m 25 --retry 2 "https://$host/offer/?x=1" || true)
+            loc=$(printf '%s' "$hdrs" | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r')
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 --retry 2 "https://$host/" || echo 000)
             echo "www-проверка $host: код=$code location=$loc"
             want="https://${host#www.}/offer/?x=1"
             if [ "$loc" = "$want" ]; then echo "OK   $host → $loc"
