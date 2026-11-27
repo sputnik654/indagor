@@ -1,7 +1,22 @@
 name: Pages smoke test
 
-# Внешняя проверка деплоя Cloudflare Pages. Запускается вручную и на каждый пуш в main.
+# Внешняя проверка деплоя. Запускается вручную и на каждый пуш в main.
 # Из России *.pages.dev недоступен (фильтрация по SNI), поэтому проверка идёт с раннера GitHub.
+#
+# Ожидания по /offer.html и /privacy.html зависят от того, кто отдаёт домен, и читаются
+# из заголовка `server`, а не задаются жёстко:
+#   Cloudflare Pages -> 301 на clean URL (правила в _redirects)
+#   GitHub Pages     -> 200 (редиректов нет, canonical смотрит на clean URL)
+# Так тест не краснеет, пока indagor.ru ещё на GitHub Pages, и сам начинает требовать 301
+# в день переезда домена на Pages.
+#
+# Эндпоинтов /track и /stats в проекте больше нет: аналитика переведена на GoatCounter
+# (коммит «Удалена аналитика Netlify: meta analytics-endpoint, tracker, netlify-функции»),
+# вместо них проверяется наличие счётчика GoatCounter в сыром HTML живых доменов.
+#
+# `if: always()` на шагах ниже: один прогон показывает сразу все расхождения, а не только
+# первое — страницы *.pages.dev из WSL не проверить, каждый лишний прогон стоит минуты.
+
 on:
   workflow_dispatch:
   push:
@@ -12,44 +27,91 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Коды ответов
         run: |
           set -u
           fail=0
+          edge() { # host -> cloudflare | github | unknown:<srv>
+            hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$1/")
+            srv=$(printf '%s' "$hdr" | awk 'tolower($1)=="server:"{print $2; exit}' | tr -d '\r')
+            case "$srv" in
+              *loudflare*) echo cloudflare ;;
+              *GitHub*)    echo github ;;
+              *)           echo "unknown:${srv:-нет заголовка}" ;;
+            esac
+          }
           check() { # host path expected
             code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 "https://$1$2" || echo 000)
             if [ "$code" = "$3" ]; then printf 'OK   %-32s %-28s %s\n' "$1" "$2" "$code"
             else printf 'FAIL %-32s %-28s %s (ожидался %s)\n' "$1" "$2" "$code" "$3"; fail=1; fi
           }
           for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
+            e=$(edge "$host")
+            echo "--- $host [$e]"
             for p in / /klondayk/ /offer/ /privacy/ /about/ /blog/ /sitemap.xml /robots.txt \
                      /llms.txt /ai.txt /.well-known/ai.txt /ai/summary.json; do
               check "$host" "$p" 200
             done
             check "$host" /nope-xyz 404
-            check "$host" /offer.html 301
-            check "$host" /privacy.html 301
-            check "$host" /track 405
-            check "$host" /stats 401
+            case "$e" in
+              cloudflare)
+                for p in /offer.html /privacy.html; do check "$host" "$p" 301; done ;;
+              github)
+                for p in /offer.html /privacy.html; do check "$host" "$p" 200; done ;;
+              *)
+                echo "FAIL $host: не удалось определить, кто отдаёт домен ($e)"; fail=1 ;;
+            esac
           done
           exit $fail
 
       - name: Редиректы ведут на clean URLs
+        if: always()
         run: |
+          set -u
           fail=0
+          edge() { # host -> cloudflare | github | unknown:<srv>
+            hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$1/")
+            srv=$(printf '%s' "$hdr" | awk 'tolower($1)=="server:"{print $2; exit}' | tr -d '\r')
+            case "$srv" in
+              *loudflare*) echo cloudflare ;;
+              *GitHub*)    echo github ;;
+              *)           echo "unknown:${srv:-нет заголовка}" ;;
+            esac
+          }
           for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
+            e=$(edge "$host")
             for pair in "offer.html:/offer/" "privacy.html:/privacy/"; do
               old="${pair%%:*}"; want="${pair##*:}"
-              loc=$(curl -sS -o /dev/null -D - -m 25 "https://$host/$old" | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r')
-              if [ "$loc" = "$want" ]; then echo "OK   $host/$old -> $loc"
-              else echo "FAIL $host/$old -> '$loc' (ожидался $want)"; fail=1; fi
+              code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 "https://$host/$old")
+              hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$host/$old")
+              loc=$(printf '%s' "$hdr" | awk 'tolower($1)=="location:"{print $2; exit}' | tr -d '\r')
+              case "$e" in
+                cloudflare)
+                  if [ "$code" = "301" ] && [ "$loc" = "$want" ]; then
+                    echo "OK   $host/$old -> 301 $loc"
+                  else
+                    echo "FAIL $host/$old: код $code, Location '$loc' (ожидался 301 на $want)"; fail=1
+                  fi ;;
+                github)
+                  # редиректа нет; проверяем, что страница жива и canonical смотрит на clean URL
+                  canon=$(curl -sS -m 25 "https://$host/$old" \
+                          | grep -o 'rel="canonical" href="[^"]*"' | head -1 | sed 's/.*href="//; s/"$//')
+                  if [ "$code" = "200" ] && [ "$canon" = "https://$host$want" ]; then
+                    echo "OK   $host/$old -> 200, canonical https://$host$want"
+                  else
+                    echo "FAIL $host/$old: код $code, canonical '$canon' (ожидался 200 + https://$host$want)"; fail=1
+                  fi ;;
+                *)
+                  echo "FAIL $host: не удалось определить, кто отдаёт домен ($e)"; fail=1 ;;
+              esac
             done
           done
           exit $fail
 
       - name: JSON-LD отдаётся в сыром HTML
+        if: always()
         run: |
           fail=0
           for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
@@ -63,7 +125,26 @@ jobs:
           done
           exit $fail
 
+      - name: Счётчик GoatCounter в HTML живых доменов
+        if: always()
+        run: |
+          fail=0
+          for host in indagor.ru indagor.online; do
+            html=$(curl -sS -m 30 --retry 2 --retry-delay 2 "https://$host/")
+            gc=$(printf '%s' "$html" | grep -c 'data-goatcounter')
+            src=$(printf '%s' "$html" | grep -c 'gc.zgo.at/count.js')
+            old=$(printf '%s' "$html" | grep -cE 'googletagmanager|mc\.yandex\.ru')
+            if [ "$gc" -ge 1 ] && [ "$src" -ge 1 ]; then
+              echo "OK   $host: GoatCounter в HTML (data-goatcounter, gc.zgo.at/count.js)"
+            else
+              echo "FAIL $host: GoatCounter не найден (data-goatcounter=$gc, count.js=$src)"; fail=1
+            fi
+            [ "$old" -ge 1 ] && echo "WARN $host: в HTML остались GTM/Метрика ($old вхождений)"
+          done
+          exit $fail
+
       - name: Живые домены indagor.ru и indagor.online
+        if: always()
         run: |
           set -u
           fail=0
@@ -71,7 +152,7 @@ jobs:
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
           while read -r p want; do
             [ -z "${p:-}" ] && continue
-            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 --retry 2 --retry-delay 2 "https://$host$p" || echo 000)
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 --retry 2 --retry-delay 2 -A "$UA" "https://$host$p" || echo 000)
             if [ "$code" = "$want" ]; then printf 'OK   %-18s %-28s %s\n' "$host" "$p" "$code"
             else printf 'FAIL %-18s %-28s %s (ожидался %s)\n' "$host" "$p" "$code" "$want"; fail=1; fi
           done <<'LIST'
@@ -79,25 +160,18 @@ jobs:
           /klondayk/ 200
           /offer/ 200
           /privacy/ 200
-          /offer.html 301
-          /privacy.html 301
           /llms.txt 200
           /sitemap.xml 200
           /robots.txt 200
           /ai/summary.json 200
           /.well-known/ai.txt 200
           /nope-xyz 404
-          /track 405
-          /stats 401
           LIST
-            out=$(curl -sS -m 25 --retry 2 -X POST "https://$host/track" -H 'content-type: text/plain;charset=UTF-8' -A "$UA" \
-                  --data-binary '{"type":"pageview","consent":false,"path":"/__smoke__/","ua_type":"desktop","lang":"en-US","viewport":1280}')
-            echo "POST https://$host/track -> $out"
-            case "$out" in *'"ok":true'*) ;; *) echo "FAIL $host: события не принимаются"; fail=1 ;; esac
           done
           exit $fail
 
       - name: www → apex 301
+        if: always()
         run: |
           set -u
           fail=0
@@ -113,5 +187,5 @@ jobs:
           exit $fail
 
       - name: Валидация JSON-LD и Product (offers/review/aggregateRating)
+        if: always()
         run: python3 .github/scripts/check_jsonld.py indagor.ru indagor.online
-
