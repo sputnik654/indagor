@@ -17,10 +17,12 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 RETRY_CODES = (429, 500, 502, 503, 504)
 
 
-def get(url, attempts=4):
+def get(url, attempts=4, pause=(5, 10, 10)):
     """Чтение URL с повторами: GitHub Pages периодически отдаёт 503, пока идёт
     пересборка (и Varnish на краю — под нагрузкой), а одиночный 503 не означает
-    поломку и не должен красить мониторинг в красный."""
+    поломку. Схема: 4 попытки, паузы 5 / 10 / 10 секунд (определено владельцем
+    27.11.2026: ждать 5-10 с и повторять, минимум 3 попытки, не паниковать из-за
+    секундной перегрузки сервера)."""
     last = None
     for i in range(attempts):
         try:
@@ -35,7 +37,7 @@ def get(url, attempts=4):
             last = e
             if i == attempts - 1:
                 raise
-        time.sleep(2 * (i + 1))
+        time.sleep(pause[min(i, len(pause) - 1)])
     raise last
 
 
