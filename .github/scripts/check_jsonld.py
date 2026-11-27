@@ -7,16 +7,36 @@ AI-файлы парсятся и не содержат Product без offers/re
 import json
 import re
 import sys
+import time
 import urllib.request
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
 
 
-def get(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read().decode("utf-8", "replace")
+RETRY_CODES = (429, 500, 502, 503, 504)
+
+
+def get(url, attempts=4):
+    """Чтение URL с повторами: GitHub Pages периодически отдаёт 503, пока идёт
+    пересборка (и Varnish на краю — под нагрузкой), а одиночный 503 не означает
+    поломку и не должен красить мониторинг в красный."""
+    last = None
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code not in RETRY_CODES or i == attempts - 1:
+                raise
+        except Exception as e:  # таймауты, TLS, обрывы
+            last = e
+            if i == attempts - 1:
+                raise
+        time.sleep(2 * (i + 1))
+    raise last
 
 
 def blocks(html):

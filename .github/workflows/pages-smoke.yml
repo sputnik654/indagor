@@ -40,7 +40,7 @@ jobs:
           set -u
           fail=0
           edge() { # host -> cloudflare | github | unknown:<srv>
-            hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$1/" || true)
+            hdr=$(curl -sS -o /dev/null -D - -m 25 --retry 2 --retry-delay 2 "https://$1/" || true)
             srv=$(printf '%s' "$hdr" | awk 'tolower($1)=="server:"{print $2; exit}' | tr -d '\r')
             case "$srv" in
               *loudflare*) echo cloudflare ;;
@@ -49,7 +49,7 @@ jobs:
             esac
           }
           check() { # host path expected
-            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 "https://$1$2" || echo 000)
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 25 --retry 2 --retry-delay 2 "https://$1$2" || echo 000)
             if [ "$code" = "$3" ]; then printf 'OK   %-32s %-28s %s\n' "$1" "$2" "$code"
             else printf 'FAIL %-32s %-28s %s (ожидался %s)\n' "$1" "$2" "$code" "$3"; fail=1; fi
           }
@@ -78,7 +78,7 @@ jobs:
           set -u
           fail=0
           edge() { # host -> cloudflare | github | unknown:<srv>
-            hdr=$(curl -sS -o /dev/null -D - -m 25 "https://$1/" || true)
+            hdr=$(curl -sS -o /dev/null -D - -m 25 --retry 2 --retry-delay 2 "https://$1/" || true)
             srv=$(printf '%s' "$hdr" | awk 'tolower($1)=="server:"{print $2; exit}' | tr -d '\r')
             case "$srv" in
               *loudflare*) echo cloudflare ;;
@@ -122,7 +122,7 @@ jobs:
           fail=0
           for host in indagor-pages.pages.dev indagor-online-pages.pages.dev indagor.ru indagor.online; do
             for p in / /klondayk/; do
-              html=$(curl -sS -m 25 "https://$host$p" || true)
+              html=$(curl -sS -m 25 --retry 2 --retry-delay 2 "https://$host$p" || true)
               n=$(printf '%s' "$html" | grep -c 'application/ld+json' || true)
               types=$(printf '%s' "$html" | grep -o '"@type": *"[^"]*"' | head -6 | tr '\n' ' ')
               if [ "$n" -ge 1 ]; then echo "OK   $host$p: блоков $n | $types"
